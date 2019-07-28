@@ -4,8 +4,13 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, DayByDay">
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex">
+    <meta name="keywords" content="第一篇, DayByDay">
+    <meta name="description" content="一、前期准备
+安装node，npm,通过cmd可以看出来是否安装成功
+
+node(前端框架)npm(随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题)
+
+接下来安装cnpm 速度更块是淘宝做的国内镜像通过输入命令">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +18,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Hello World | DayByDay</title>
+    <title>第一篇 | DayByDay</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -278,13 +283,13 @@
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Hello World
+                        第一篇
                     </div>
                 </div>
             </div>
@@ -387,7 +392,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2019-07-28
+                    2018-07-28
                 </div>
 
                 
@@ -403,19 +408,54 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+                <h3 id="一、前期准备"><a href="#一、前期准备" class="headerlink" title="一、前期准备"></a>一、前期准备</h3><ol>
+<li>安装node，npm,通过cmd可以看出来是否安装成功</li>
+</ol>
+<p>node(前端框架)<br>npm(随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题)<br><img src="https://img-blog.csdnimg.cn/201907281453589.png" alt></p>
+<ul>
+<li>接下来安装cnpm 速度更块是淘宝做的国内镜像<br>通过输入命令行(npm install -g cnpm -registry=<a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a>)<br><img src="https://img-blog.csdnimg.cn/20190728151844338.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1MDY0NjM1,size_16,color_FFFFFF,t_70" alt></li>
+</ul>
+<ol start="2">
+<li>安装hexo框架<br>执行语句完成安装 cnpm install -g hexo-cli<br><img src="https://img-blog.csdnimg.cn/20190728152314927.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1MDY0NjM1,size_16,color_FFFFFF,t_70" alt></li>
+<li>新建一个文件夹用来存放生成的blog文件</li>
+</ol>
+<h2 id="二、hexo相关操作"><a href="#二、hexo相关操作" class="headerlink" title="二、hexo相关操作"></a>二、hexo相关操作</h2><ol>
+<li>执行(hexo init)，初始化hexo环境,需要较长时间</li>
+</ol>
+<p>安装时会卡在npm install loadAllDepsIntoIdealTree<br>因为npm还是通过原有地址进行下载，需要修改成镜像地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">修改</span><br><span class="line">npm config set registry https://registry.npm.taobao.org</span><br><span class="line">查看</span><br><span class="line">npm config get registry</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>看到以下说明初始化成功<br><img src="https://img-blog.csdnimg.cn/20190728164515889.png" alt></p>
+<ol start="2">
+<li>启动(hexo s)</li>
+</ol>
+<p>即可看到自己的博客</p>
+<ol start="3">
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">常用命令</span><br><span class="line">hexo new &quot;postName&quot; #新建文章</span><br><span class="line">hexo new page &quot;pageName&quot; #新建页面</span><br><span class="line">hexo generate #生成静态页面至public目录</span><br><span class="line">hexo server #开启预览访问端口（默认端口4000，&apos;ctrl + c&apos;关闭server）</span><br><span class="line">hexo deploy #部署到GitHub</span><br><span class="line">hexo help  # 查看帮助</span><br><span class="line">hexo version  #查看Hexo的版本</span><br><span class="line"></span><br><span class="line">缩写</span><br><span class="line">hexo n == hexo new</span><br><span class="line">hexo g == hexo generate</span><br><span class="line">hexo s == hexo server</span><br><span class="line">hexo d == hexo deploy</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="三、发布到Github上"><a href="#三、发布到Github上" class="headerlink" title="三、发布到Github上"></a>三、发布到Github上</h2><ol>
+<li>自己的github上新建一个仓库</li>
+</ol>
+<ol start="2">
+<li><p>安装hexo的git插件<br>cnpm install hexo-deployer-git –save</p>
+</li>
+<li><p>修改_config.yml 文件，里面是配置信息<br>最后一行修改<br><img src="https://img-blog.csdnimg.cn/20190728170102707.png" alt></p>
+</li>
+<li><p>命令hexo d，发布到git仓库</p>
+</li>
+<li><p>直接连接 <a href="https://zqfang666.github.io/" target="_blank" rel="noopener">https://zqfang666.github.io/</a>  进入博客</p>
+</li>
+</ol>
+<h2 id="博客美化"><a href="#博客美化" class="headerlink" title="博客美化"></a>博客美化</h2><ol>
+<li>_config.yml 文件的信息</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">#博客名称</span><br><span class="line">title: 我的博客</span><br><span class="line">#副标题</span><br><span class="line">subtitle: 一天进步一点</span><br><span class="line">#简介</span><br><span class="line">description: 记录生活点滴</span><br><span class="line">#博客作者</span><br><span class="line">author: lxq</span><br><span class="line">#博客语言</span><br><span class="line">language: zh-CN</span><br><span class="line">#时区</span><br><span class="line">timezone:</span><br><span class="line"></span><br><span class="line">#博客地址,与申请的GitHub一致</span><br><span class="line">url: http://elfwalk.github.io</span><br><span class="line">root: /</span><br><span class="line">#博客链接格式</span><br><span class="line">permalink: :year/:month/:day/:title/</span><br><span class="line">permalink_defaults:</span><br><span class="line"></span><br><span class="line">source_dir: source</span><br><span class="line">public_dir: public</span><br><span class="line">tag_dir: tags</span><br><span class="line">archive_dir: archives</span><br><span class="line">category_dir: categories</span><br><span class="line">code_dir: downloads/code</span><br><span class="line">i18n_dir: :lang</span><br><span class="line">skip_render:</span><br><span class="line"></span><br><span class="line">new_post_name: :title.md # File name of new posts</span><br><span class="line">default_layout: post</span><br><span class="line">titlecase: false # Transform title into titlecase</span><br><span class="line">external_link: true # Open external links in new tab</span><br><span class="line">filename_case: 0</span><br><span class="line">render_drafts: false</span><br><span class="line">post_asset_folder: false</span><br><span class="line">relative_link: false</span><br><span class="line">future: true</span><br><span class="line">highlight:</span><br><span class="line">  enable: true</span><br><span class="line">  line_number: true</span><br><span class="line">  auto_detect: true</span><br><span class="line">  tab_replace:</span><br><span class="line"></span><br><span class="line">default_category: uncategorized</span><br><span class="line">category_map:</span><br><span class="line">tag_map:</span><br><span class="line"></span><br><span class="line">#日期格式</span><br><span class="line">date_format: YYYY-MM-DD</span><br><span class="line">time_format: HH:mm:ss</span><br><span class="line"></span><br><span class="line">#分页，每页文章数量</span><br><span class="line">per_page: 10</span><br><span class="line">pagination_dir: page</span><br><span class="line"></span><br><span class="line">#博客主题</span><br><span class="line">theme: landscape</span><br><span class="line"></span><br><span class="line">#发布设置</span><br><span class="line">deploy: </span><br><span class="line">  type: git</span><br><span class="line">  #elfwalk改为你的github用户名</span><br><span class="line">  repository: https://github.com/elfwalk/elfwalk.github.io.git</span><br><span class="line">  branch: maste</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<ol start="2">
+<li>通过   git clone <a href="https://github.com/litten/hexo-theme-yilia.git" target="_blank" rel="noopener">https://github.com/litten/hexo-theme-yilia.git</a> themes/yilia   命令，来克隆主题</li>
+</ol>
 
             </div>
             <hr/>
@@ -556,7 +596,7 @@
                     </span>
                     <a href="http://yoursite.com" class="b-link-green">DayByDay</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/07/28/hello-world/" class="b-link-green">Hello World</a>
+                    <a href="/2018/07/28/第一篇/" class="b-link-green">第一篇</a>
                 </p>
             </div>
         </div>
@@ -577,10 +617,9 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-dot-circle-o"></i>&nbsp;Current
-            </div>
+                <i class="fa fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
                 <a href="/2019/07/28/hello-world/">
                     <div class="card-image">
@@ -594,9 +633,9 @@
                 <div class="card-content article-content">
                     <div class="summary">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex</div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-28
-                            </span>
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-28
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-user fa-fw"></i>
@@ -605,7 +644,6 @@
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
@@ -613,7 +651,7 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fa fa-chevron-right"></i>
+                Current&nbsp;<i class="fa fa-dot-circle-o"></i>
             </div>
             <div class="card">
                 <a href="/2018/07/28/第一篇/">
@@ -644,6 +682,7 @@ node(前端框架)npm(随同NodeJS一起安装的包管理工具，能解决Node
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
