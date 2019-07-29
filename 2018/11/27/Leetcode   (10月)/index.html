@@ -1,0 +1,939 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Leetcode(10月), DayByDay">
+    <meta name="description" content="10月份01题TWO SUM（10.6）
+
+python暴力法报错运行时间超时，时间复杂度O(n^2)，空间复杂度O(1)l = len(nums)
+      for i in range(l):
+          if nums[i]">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Leetcode(10月) | DayByDay</title>
+    <link rel="icon" type="image/jpeg" href="/favicon.jpg">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+</head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo.jpg" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">DayByDay</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.jpg" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">DayByDay</div>
+        <div class="logo-desc">
+            
+            Java成长之路
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+    </ul>
+
+    <div class="social-link">
+    <a href="https://github.com/zqfang666" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:zqfang321@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=847368807" class="tooltipped" data-tooltip="QQ联系我: 847368807" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        Leetcode(10月)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+</style>
+<div class="row">
+    <div class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Leetcode/" target="_blank">
+                                <span class="chip bg-color">Leetcode</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Coding/" class="post-category" target="_blank">
+                                Coding
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2018-11-27
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        2.4k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        12 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="10月份"><a href="#10月份" class="headerlink" title="10月份"></a>10月份</h1><h2 id="01题TWO-SUM（10-6）"><a href="#01题TWO-SUM（10-6）" class="headerlink" title="01题TWO SUM（10.6）"></a>01题TWO SUM（10.6）</h2><p><img src="https://img-blog.csdn.net/201810061348522?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1MDY0NjM1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="所示"></p>
+<ul>
+<li>python暴力法<br>报错运行时间超时，时间复杂度O(n^2)，空间复杂度O(1)<pre><code>l = len(nums)
+      for i in range(l):
+          if nums[i] &gt; target :
+              continue
+          if i == l-1 :
+              return &#39;error&#39;
+          for j in range(i+1,l):
+              if nums[i]+nums[j] == target :
+                  return [i,j]</code></pre></li>
+<li>python一遍哈希表，时间O(n)，空间O(n)</li>
+</ul>
+<pre><code>def twoSum(nums, target):
+    d = {}
+    for i, n in enumerate(nums):
+        if n in d:
+            return [d[n], i]
+        else:
+            d[target-n]=i
+    return (0,0)</code></pre><p>因为没有查找value的方法，所以创建一个value-key 的dict，其中的d[target-num[i]] = i，在创建哈希表的同时就可以查找，找到键对应值的就为第一个数的位置</p>
+<ul>
+<li>Java 一遍哈希表<br>Map接口<br>boolean containsKey(Object k)<br>如果此映射包含指定键的映射关系，则返回 true<br>Object get(Object k)<br>返回指定键所映射的值；如果此映射不包含该键的映射关系，则返回 null。</li>
+</ul>
+<pre><code>class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        Map&lt;Integer,Integer&gt; map = new HashMap&lt;&gt;();
+        for(int i = 0;i&lt;nums.length;i++){
+            int b = target - nums[i];
+            if(map.containsKey(b)){
+                return new int[] {map.get(b),i};
+            }
+            map.put(nums[i],i);
+        }
+        throw new IllegalArgumentException(&quot;No two sum solution&quot;);
+    }
+}</code></pre><p><a href="https://blog.csdn.net/CLHugh/article/details/75000104" target="_blank" rel="noopener">Python 中self 用法</a><br>主要是用于类中定义函数方便调用</p>
+<h2 id="02题Add-Two-Numbers（10-9）"><a href="#02题Add-Two-Numbers（10-9）" class="headerlink" title="02题Add Two Numbers（10.9）"></a>02题Add Two Numbers（10.9）</h2><blockquote>
+<p>You are given two non-empty linked lists representing two non-negative<br>integers. The digits are stored in reverse order and each of their<br>nodes contain a single digit. Add the two numbers and return it as a<br>linked list.</p>
+<p>You may assume the two numbers do not contain any leading zero, except<br>the number 0 itself.</p>
+<p>Example:</p>
+<p>Input: (2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4) Output: 7 -&gt; 0 -&gt; 8 Explanation:<br>342 + 465 = 807.</p>
+</blockquote>
+<p>这道题学习到了链表的操作，Java和python中利用引用，定义类来实现链表等数据结构的操作</p>
+<ul>
+<li>python麻烦的</li>
+</ul>
+<pre><code> def addTwoNumbers(self, l1, l2):
+        &quot;&quot;&quot;
+        :type l1: ListNode
+        :type l2: ListNode
+        :rtype: ListNode
+        &quot;&quot;&quot;
+        #进位        
+        cur = 0
+        item = z = ListNode(0)
+        a = l1.val + l2.val
+        cur = a//10
+        item.next = ListNode(a%10)       
+        item =item.next
+        #巧妙的对z进行操作实现链表，下一个对应一个链
+        while l1.next and l2.next:
+            l1 = l1.next
+            l2 = l2.next
+            a = l1.val + l2.val
+            b = a%10 + cur
+            item.next = ListNode(b%10)
+            cur = a//10+b//10
+            item = item.next            
+        if l1.next == None and l2.next == None :
+            if cur&gt;0:
+                item.next = ListNode(cur)
+            return z.next         
+        elif l1.next == None:
+            while l2.next:
+                l2 = l2.next
+                a = l2.val
+                b = a + cur
+                item.next = ListNode(b%10)
+                cur = b//10
+                item = item.next
+            if cur&gt;0:
+                item.next = ListNode(cur)
+            return z.next
+        elif l2.next == None:
+            while l1.next:
+                l1 = l1.next
+                a = l1.val
+                b = a + cur
+                item.next = ListNode(b%10)
+                cur = b//10
+                item = item.next
+            if cur&gt;0:
+                item.next = ListNode(cur)
+            return z.next</code></pre><ul>
+<li>python别人的</li>
+</ul>
+<pre><code>class Solution:
+    def addTwoNumbers(self, l1, l2):
+        &quot;&quot;&quot;
+        :type l1: ListNode
+        :type l2: ListNode
+        :rtype: ListNode
+        &quot;&quot;&quot;
+        temp = z = ListNode(0)
+        cur = 0
+        while l1 or l2 or cur:
+            if l1:
+                cur +=l1.val
+                l1 = l1.next
+            if l2:
+                cur +=l2.val
+                l2 = l2.next
+            temp.next = ListNode(cur%10)
+            temp = temp.next
+            cur //=10    
+        return z.next   </code></pre><ul>
+<li>Java的</li>
+</ul>
+<pre><code> public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+            ListNode z = new ListNode(0);
+            ListNode p = l1,q = l2,temp = z;
+            int cur = 0;
+            while(p!=null || q!=null) {
+                int x = (p!=null)? p.val:0;
+                int y = (q!=null)? q.val:0;
+                int sum = x+y+cur;
+                cur = sum/10;
+                temp.next = new ListNode(sum%10);
+                temp = temp.next;
+                if(p!=null) {
+                    p = p.next;
+                }
+                if(q!=null) {
+                    q = q.next;
+                }
+        }
+            if(cur&gt;0) {
+                temp.next = new ListNode(cur);
+            }
+        return z.next;
+
+}</code></pre><ul>
+<li><a href="https://www.cnblogs.com/qlshine/p/6049457.html" target="_blank" rel="noopener">Python定义类的几种方法总结：</a><br> 1__init__()，用于初始化一个类<h2 id="03题（10-10）Longest-Substring-Without-Repeating-Characters"><a href="#03题（10-10）Longest-Substring-Without-Repeating-Characters" class="headerlink" title="03题（10.10）Longest Substring Without Repeating Characters"></a>03题（10.10）Longest Substring Without Repeating Characters</h2></li>
+<li>python暴力（超时）<br>对于每一个函数的任务要明确，算法思想要少漏洞<pre><code>def lengthOfLongestSubstring(s):
+ &quot;&quot;&quot;
+ :type s: str
+ :rtype: int
+ &quot;&quot;&quot;
+ max = 0
+ for i in range(len(s)):
+     for j in range(i+1,len(s)+1):
+         if isSubstring(s,i,j):
+             length = j-i
+             if(length&gt;max):
+                 max = length
+ return max
+</code></pre></li>
+</ul>
+<p>def isSubstring(s,i,j):<br>    for m in range(i,j):<br>        if s[m] in s[m+1:j]:<br>            return False<br>    return True</p>
+<pre><code>- python滑动窗口
+</code></pre><pre><code>def lengthOfLongestSubstring(self, s):
+    &quot;&quot;&quot;
+    :type s: str
+    :rtype: int
+    &quot;&quot;&quot;
+    a = &#39;&#39;
+    j =0
+    max = 0
+    n = len(s)
+    while(j&lt;n):
+        if(s[j] not in a):
+            a = a+s[j]
+            j = j+1
+            if(max&lt;len(a)):
+                max = len(a)
+        else:
+            a = a[1::]   
+    return max      </code></pre><pre><code>- python优化的滑动窗口
+</code></pre><p>a = {}<br>        j = 0<br>        ans = 0<br>        for i in range(len(s)):<br>            if(s[i] in a):<br>                j = max(a[s[i]],j)<br>            a[s[i]] = i+1<br>            ans = max(ans,i-j+1)<br>        return ans</p>
+<pre><code>## 04题Median of Two Sorted Arrays（10.13）
+m个 num1  i处分开    
+n个 num2   j处分开
+
+1、i + j =m-i +n - j(或：m-i+n-j+1)      n&gt;m  j = (m+n+1)/2
+2、A[i-1]&lt;=b[j]  b[j-1]&lt;=A[i]
+二叉树搜索：    
+imin=0，imax= m,i = (imin+imax)/2    </code></pre><p>def findMedianSortedArrays(self, A, B):<br>        “””<br>        :type nums1: List[int]<br>        :type nums2: List[int]<br>        :rtype: float<br>        “””<br>        m = len(A)<br>        n = len(B)<br>        if m&gt;n:<br>            A,B,m,n = B,A,n,m<br>        if n == 0:<br>            return error<br>        imin = 0<br>        imax = m<br>        x = (m+n+1)//2<br>        while(imin&lt;=imax):<br>            i = (imin+imax)//2<br>            j = x-i<br>            if i&lt;m and B[j-1]&gt;A[i] :<br>                imin = i+1<br>            elif i&gt;0 and  A[i-1]&gt;B[j]:<br>                imax = i-1<br>            else:<br>                if i == 0: maxleft = B[j-1]<br>                elif j == 0: maxleft =A[i-1]<br>                else : maxleft = max(A[i-1],B[j-1])</p>
+<pre><code>            if(m+n)%2 == 1:
+                return maxleft
+
+            if i == m: minright = B[j]
+            elif j == n: minright = A[i]
+            else: minright = min(A[i],B[j])
+
+            return (maxleft+minright)/2.0</code></pre><pre><code>
+
+
+## 05题Longest Palindromic Substring
+- 中心扩展算法：从回文的中心开始找，对所有字符遍历，中心有两种可能：单个字符，以及挨着的相等字符               时间O（n2）
+</code></pre><p>def longestPalindrome(self, s):<br>        “””<br>        :type s: str<br>        :rtype: str<br>        “””<br>        n = len(s)<br>        start,end = 0,0<br>        for i in range(n):<br>            len1 = self.palindromic(s,i,i)<br>            len2 = self.palindromic(s,i,i+1)<br>            L = max(len1,len2)<br>            if(L&gt;end-start):<br>                start = i - (L-1)//2<br>                end = i + L//2<br>        return s[start:end+1]</p>
+<pre><code>def palindromic(self,s,i,j):
+    L,R = i,j
+    while(L&gt;=0 and R&lt;len(s) and s[L] == s[R]):
+        L -= 1
+        R += 1
+    return R-L-1</code></pre><pre><code>- **Manacher 算法**
+时间复杂度O（N）的专门解决回文的算法    
+ 1. 算法分析
+
+由于回文分为奇偶回文，处理比较麻烦，在每个字符前后都加上一个符号，从而变成奇数</code></pre><p>s =‘abcd’      变为   s = ‘#a#b#c#d’</p>
+<pre><code>回文具有对称性质，pal（i）以i为中心的最大回文半径
+![在这里是图片描述](https://img-blog.csdn.net/20181018100339753?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1MDY0NjM1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+图中为以id为中心的回文，mx是回文的边界，我们想要得到以i为中心的最大回文半径，可以通过对j（i关于id的对称点）求解得到   ------j = 2*id - i
+</code></pre><p>if(i&lt;mx)<br>    p[i] = min(p[2<em>id-i],mx-i)<br>    若 p[2</em>id-i] == mx-i<br>        i还可以再往两边增加</p>
+<pre><code>以上通过P[j]，可以快速得到对称的回文数，减少时间复杂度
+
+ 2. 马拉车代码
+</code></pre><p>class Solution:<br>    def longestPalindrome(self,s):<br>        ss = ‘’                     #装入加了#号的新字符串<br>        for i in s:<br>            ss = ss+’#’<br>            ss = ss+i<br>        ss = ss+’#’<br>        p = [0]*2001                #表示以i为中心的最长回文字符串半径<br>        start,end,maxlen,mx = 0,0,0,0  #mx是以id为中心的回文最右边，start end最长的开始和结束</p>
+<pre><code>    for i in range(len(ss)):
+        if(i&lt;mx):         
+            p[i] = min(p[2*id-i],mx-i)       #如果在id回文的边界之内，则可以借鉴对称位置的值
+        else:
+            p[i] = 1
+        while((i - p[i])&gt;=0 and i+p[i]&lt;len(ss) and ss[i-p[i]] == ss[i+p[i]]):   #在已知基础上看还有没有其他值
+            p[i] += 1
+        if(mx&lt;i+p[i]):                      #更新id和mx
+            id = i
+            mx = i+p[i]
+        if(maxlen&lt;(p[i]-1)):               #如果最大长度替换原来的
+            maxlen = p[i]-1
+            start = i+1-p[i]
+            end = i+p[i]-1
+
+    return ss[start:end+1].replace(&#39;#&#39;,&#39;&#39;)</code></pre><pre><code>## 10、Container With Most Water（10.19）
+暴力法python  o（n2）超时
+</code></pre><p>m = 0<br>        long = len(height)<br>        for i in range(long-1):<br>            for j in range(i+1,long):<br>                high = min(height[i],height[j])<br>                s = (j-i)*high<br>                if(m&lt;s): m = s<br>        return m</p>
+<pre><code>由两边向中心
+</code></pre><pre><code>def maxArea(self, height):
+    end = len(height)-1
+    start = 0
+    max = 0
+    while(start&lt;end):
+        s = (end-start)*min(height[start],height[end])
+        if(max&lt;s): max = s
+        if(height[start]&lt;height[end]):
+            start += 1
+        else: 
+            end -=1
+
+    return max</code></pre><pre><code>## 15.3SUM（10.20）
+思路：简单的暴力法肯定会超时
+
+换思路，先排序（通过排序解决重复问题），选出一个数后取反-c，如果遇到相等的直接跳过，然后从右边剩下的里面找a,b,从两边向中间找，a如果相等直接跳过，直到
+a+b = -c
+</code></pre><p>def threeSum(self, nums):<br>        “””<br>        :type nums: List[int]<br>        :rtype: List[List[int]]<br>        “””<br>        l,ans = len(nums),[]<br>        nums.sort()<br>        for i in range(l-2):<br>            if i &gt; 0 and nums[i] == nums[i-1]:<br>                continue<br>            c = nums[i]*-1<br>            a = i+1<br>            b = l-1<br>            while a&lt;b :<br>                if nums[a]+nums[b] == c:<br>                    ans.append([nums[i],nums[a],nums[b]])<br>                    a += 1<br>                    while a&lt;b and nums[a] == nums[a-1]:<br>                        a += 1<br>                elif nums[a] + nums[b] &lt; c :<br>                    a += 1<br>                else:<br>                    b -= 1<br>        return ans</p>
+<pre><code>## 17.Letter Combinations of a Phone Number(10.21-11.8)
+
+思路：通过输入的数字，得到要输出的key值——num，循环遍历num，将对应的value相加
+两个数组相加最简单，多个数组很难操作
+通过新建一个空数组的方式，循环进行两数组相加
+
+ - python</code></pre><pre><code>n = len(digits)
+    phone = {2:&#39;abc&#39;,3:&#39;def&#39;,4:&#39;ghi&#39;,5:&#39;jkl&#39;,6:&#39;mno&#39;,7:&#39;pqrs&#39;,8:&#39;tuv&#39;,9:&#39;wxyz&#39;}
+    res = [&#39;&#39;]
+    if n == 0:
+        return []
+    for i in digits:
+        num = phone[int(i)]  
+        newres = []
+        for a in num:
+            for b in res:
+                newres.append(b+a)
+        res = newres
+    return res</code></pre><pre><code>- java一样思路的解法
+（其中java直接赋值是将地址给了）</code></pre><p>public List<string> letterCombinations(String digits) {<br>        List<string> ans = new ArrayList<string>();<br>        List<string> newans = new ArrayList<string>();<br>        String[] mapping = new String[] {“0”, “1”, “abc”, “def”, “ghi”, “jkl”, “mno”, “pqrs”, “tuv”, “wxyz”};<br>        if(digits.isEmpty()) return ans ;<br>        ans.add(“”);<br>        for(int i=0;i&lt;digits.length();i++) {<br>            int x = Character.getNumericValue(digits.charAt(i));<br>            newans.clear();<br>            for(char s : mapping[x].toCharArray())<br>                {<br>                    for(String t: ans) {<br>                        newans.add(t+s);<br>                    }<br>                }<br>            ans.clear();<br>            ans.addAll(newans);<br>        }<br>        return ans;<br>    }</string></string></string></string></string></p>
+<pre><code>- java另一个思路
+
+remove(),直接去掉第一个元素并取出，一直循环直到所有的元素都加上了新的</code></pre><p>public static List<string> letterCombinations(String digits) {<br>        LinkedList<string> ans = new LinkedList<string>();<br>        String[] mapping = new String[] {“0”, “1”, “abc”, “def”, “ghi”, “jkl”, “mno”, “pqrs”, “tuv”, “wxyz”};<br>        if(digits.isEmpty()) return ans ;<br>        ans.add(“”);<br>        for(int i=0;i&lt;digits.length();i++) {<br>            int x = Character.getNumericValue(digits.charAt(i));<br>            while(ans.peek().length()==i){<br>                String t = ans.remove();<br>                for(char s : mapping[x].toCharArray())<br>                    ans.add(t+s);<br>            }<br>        }<br>        return ans;</string></string></string></p>
+<pre><code>}</code></pre><pre><code></code></pre>
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="https://zqfang666.github.io" class="b-link-green">DayByDay</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2018/11/27/Leetcode   (10月)/" class="b-link-green">Leetcode(10月)</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/03/07/kaggle 入门 泰坦尼克 处理过程/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="kaggle 入门 泰坦尼克 处理过程">
+                        
+                        <span class="card-title">kaggle 入门 泰坦尼克 处理过程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">一、数据预处理
+pandas库的内容（数据分析处理）：
+read_csv   ：读取文件，变为矩阵
+
+
+
+
+head(n) : 输出前n行内容，默认5
+PassengerId  Survived  Pclass  \
+0          </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-03-07
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/实践/" class="post-category" target="_blank">
+                                    实践
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/机器学习/" target="_blank">
+                        <span class="chip bg-color">机器学习</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2018/07/28/hello-world/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        
+                        <span class="card-title">Hello World</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-07-28
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-user fa-fw"></i>
+                            Fangzq
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+    </div>
+    <div class="col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="https://blinkfox.github.io/" target="_blank">Blinkfox</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">30.1k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/zqfang666" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:zqfang321@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=847368807" class="tooltipped" data-tooltip="QQ联系我: 847368807" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input" autofocus="">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

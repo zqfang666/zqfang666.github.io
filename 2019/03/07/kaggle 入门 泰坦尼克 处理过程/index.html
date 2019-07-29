@@ -1,0 +1,931 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="kaggle 入门 泰坦尼克 处理过程, DayByDay">
+    <meta name="description" content="一、数据预处理
+pandas库的内容（数据分析处理）：
+read_csv   ：读取文件，变为矩阵
+
+
+
+
+head(n) : 输出前n行内容，默认5
+PassengerId  Survived  Pclass  \
+0          ">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>kaggle 入门 泰坦尼克 处理过程 | DayByDay</title>
+    <link rel="icon" type="image/jpeg" href="/favicon.jpg">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+</head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo.jpg" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">DayByDay</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.jpg" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">DayByDay</div>
+        <div class="logo-desc">
+            
+            Java成长之路
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+    </ul>
+
+    <div class="social-link">
+    <a href="https://github.com/zqfang666" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:zqfang321@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=847368807" class="tooltipped" data-tooltip="QQ联系我: 847368807" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        kaggle 入门 泰坦尼克 处理过程
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+</style>
+<div class="row">
+    <div class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/机器学习/" target="_blank">
+                                <span class="chip bg-color">机器学习</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/实践/" class="post-category" target="_blank">
+                                实践
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-03-07
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        3.9k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        17 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="一、数据预处理"><a href="#一、数据预处理" class="headerlink" title="一、数据预处理"></a>一、数据预处理</h2><ol>
+<li>pandas库的内容（数据分析处理）：<ul>
+<li>read_csv   ：读取文件，变为矩阵</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><p>head(n) : 输出前n行内容，默认5</p>
+<pre><code>PassengerId  Survived  Pclass  \
+0            1         0       3   
+1            2         1       1   
+2            3         1       3   
+
+                                              Name     Sex   Age  SibSp  \
+0                            Braund, Mr. Owen Harris    male  22.0      1   
+1  Cumings, Mrs. John Bradley (Florence Briggs Th...  female  38.0      1   
+2                             Heikkinen, Miss. Laina  female  26.0      0   
+
+ Parch            Ticket     Fare Cabin Embarked  
+0      0         A/5 21171   7.2500   NaN        S  
+1      0          PC 17599  71.2833   C85        C  
+2      0  STON/O2. 3101282   7.9250   NaN        S </code></pre></li>
+<li><p>describe() : 对特征值进行描述</p>
+<pre><code>     PassengerId    Survived      Pclass         Age       SibSp  \
+count   891.000000  891.000000  891.000000  714.000000  891.000000   
+mean    446.000000    0.383838    2.308642   29.699118    0.523008   
+std     257.353842    0.486592    0.836071   14.526497    1.102743   
+min       1.000000    0.000000    1.000000    0.420000    0.000000   
+25%     223.500000    0.000000    2.000000   20.125000    0.000000   
+50%     446.000000    0.000000    3.000000   28.000000    0.000000   
+75%     668.500000    1.000000    3.000000   38.000000    1.000000   
+max     891.000000    1.000000    3.000000   80.000000    8.000000   
+
+          Parch        Fare  
+count  891.000000  891.000000  
+mean     0.381594   32.204208  
+std      0.806057   49.693429  
+min      0.000000    0.000000  
+25%      0.000000    7.910400  
+50%      0.000000   14.454200  
+75%      0.000000   31.000000  
+max      6.000000  512.329200  </code></pre></li>
+<li><p>info()  ： 每个特征值有多少项，是否有缺失值及数据类型</p>
+</li>
+</ul>
+<pre><code>RangeIndex: 891 entries, 0 to 890
+Data columns (total 12 columns):
+PassengerId    891 non-null int64
+Survived       891 non-null int64
+Pclass         891 non-null int64
+Name           891 non-null object
+Sex            891 non-null object
+Age            714 non-null float64
+SibSp          891 non-null int64
+Parch          891 non-null int64
+Ticket         891 non-null object
+Fare           891 non-null float64
+Cabin          204 non-null object
+Embarked       889 non-null object
+dtypes: float64(2), int64(5), object(5)
+memory usage: 83.6+ KB
+None</code></pre><ul>
+<li>数据填充<br>fillna(  )  ： 将空白的数据进行填充 <pre><code>train[&#39;Age&#39;] = train[&#39;Age&#39;].fillna(train[&#39;Age&#39;].median)
+train[&#39;Embarked&#39;] = train[&#39;Embarked&#39;].fillna(&#39;S&#39;)</code></pre><ul>
+<li>字符变数字<br>定位函数 loc   ：定位特征值等于XX的行，某个特征值=？<br>loc——通过行标签索引行数据<br>iloc——通过行号索引行数据 （a，b）a代表行，b代表列<br>ix——通过行标签或者行号索引行数据（基于loc和iloc 的混合）<pre><code>train.loc[train[&#39;Sex&#39;]==&#39;male&#39;,&#39;Sex&#39;] = 0
+train.loc[train[&#39;Sex&#39;]==&#39;female&#39;,&#39;Sex&#39;] = 1
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<p>train.loc[train[‘Embarked’]==’S’,’Embarked’] = 0<br>train.loc[train[‘Embarked’]==’C’,’Embarked’] = 1<br>train.loc[train[‘Embarked’]==’Q’,’Embarked’] = 2</p>
+<pre><code>## 二、数据图表处理
+### 1.将各特征值用图标显示
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20181109144731761.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1MDY0NjM1,size_16,color_FFFFFF,t_70)
+
+ -  获救人数300多人，不到一半
+ -  三等舱人最多，二等舱人最少
+ -  获救与否，人的年龄分布广泛
+ -  舱位等级越高，年龄普遍越大
+ -  上船位置排序，S&gt;C&gt;Q
+
+### 2.查看舱位等级、性别与获救人数关系
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20181112102910299.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1MDY0NjM1,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/2018111210302234.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1MDY0NjM1,size_16,color_FFFFFF,t_70)
+- 头等舱的获救比例明显高很多
+- 获救人数中女性比例明显高很多
+
+
+### 3.性别+等级
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20181112102216162.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1MDY0NjM1,size_16,color_FFFFFF,t_70)
+- 同第二个相同
+
+### 4.登船口与获救关系
+![](https://img-blog.csdnimg.cn/20181112102004810.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1MDY0NjM1,size_16,color_FFFFFF,t_70)
+- 获救人数S&gt;C&gt;Q
+### 5.堂兄弟妹、孩子父母
+ ![在这里插入图片描述](https://img-blog.csdnimg.cn/20181112104453480.png)         ![在这里插入图片描述](https://img-blog.csdnimg.cn/20181112104354521.png)
+### 6.统计 Cabin 
+- 缺失值较多，800个人只有147个有，考虑统计是否有cabin</code></pre><p>C23 C25 C27        4<br>B96 B98            4<br>G6                 4<br>F33                3<br>F2                 3<br>D                  3<br>C22 C26            3<br>E101               3<br>D17                2<br>C83                2<br>B58 B60            2<br>C65                2<br>C78                2<br>E24                2<br>C2                 2<br>B18                2<br>B35                2<br>C68                2<br>。。。。。。。<br>E46                1<br>A32                1<br>C128               1<br>Name: Cabin, Length: 147, dtype: int64</p>
+<pre><code>![在这里插入图片描述](https://img-blog.csdnimg.cn/20181112110452239.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1MDY0NjM1,size_16,color_FFFFFF,t_70)
+
+- 可以看出有这个属性的人获救比例更高
+
+## 三、特征工程
+1. 缺失值处理：（根据数据的info属性，得到age、cabin缺失最多）
+- 如果缺值的样本占总数比例极高，我们可能就直接舍弃了，作为特征加入的话，可能反倒带入noise，影响最后的结果了
+- 如果缺值的样本适中，而该属性非连续值特征属性(比如说类目属性)，那就把NaN作为一个新类别，加到类别特征中
+- 如果缺值的样本适中，而该属性为连续值特征属性，有时候我们会考虑给定一个step(比如这里的age，我们可以考虑每隔2/3岁为一个步长)，然后把它离散化，之后把NaN作为一个type加到属性类目中。（把age属性作为类目属性）
+- 有些情况下，缺失的值个数并不是特别多，那我们也可以试着根据已有的值，拟合一下数据，补充上。
+
+2. 用scikit-learn中的RandomForest（随机森林）来补充Age中的缺失值
+
+用&#39;Fare&#39;, &#39;Parch&#39;, &#39;SibSp&#39;, &#39;Pclass属性，来预测age。将完好的数据，数值型的特征输入RFR进行fit；然后将缺失age的样本其他特征输入获得age</code></pre><p>def miss_age(df):<br>    # 把已有的数值型特征取出来丢进Random Forest Regressor中<br>    age_df = df[[‘Age’,’Fare’, ‘Parch’, ‘SibSp’, ‘Pclass’]]<br>    # 乘客分成已知年龄和未知年龄两部分<br>    known_age = age_df[age_df.Age.notnull()].as_matrix()<br>    unknown_age = age_df[age_df.Age.isnull()].as_matrix()<br><br>    # y即目标年龄([x,y]表示x取全部，y只取第一位)<br>    y = known_age[:, 0]<br>    # X即特征属性值<br>    X = known_age[:, 1:]<br><br>    # fit到RandomForestRegressor之中<br>    rfr = RandomForestRegressor(random_state=0, n_estimators=2000, n_jobs=-1)<br>    rfr.fit(X, y)<br><br>    # 用得到的模型进行未知年龄结果预测<br>    predictedAges = rfr.predict(unknown_age[:, 1:])<br>    # 用得到的预测结果填补原缺失数据<br>    df.loc[ (df.Age.isnull()), ‘Age’ ] = predictedAges<br><br>    return df, rfr</p>
+<pre><code>3. 将所有特征改为数值型
+离散特征的编码分为两种情况：
+
+- 离散特征的取值之间没有大小的意义，比如color：[red,blue],那么就使用one-hot编码
+利用pandas中的get_dummies 对离散特征进行编码
+&gt; 有一篇教学直接这些属性用数字0，1，2，3代替，其实是不严谨的，因为本来他只是一个属性没有数值意义，数字使他们有了大小区分，这跟将每个特征的属性作为一个特征，得到的模型肯定不一样，精确度应该也是one-hot更好。
+
+pandas.get_dummies(data, prefix=None, prefix_sep=&#39;_&#39;, dummy_na=False, columns=None, sparse=False, drop_first=False)</code></pre><p>data : array-like, Series, or DataFrame<br>输入的数据<br>prefix : string, list of strings, or dict of strings, default None<br>get_dummies转换后，列名的前缀<br>*columns : list-like, default None<br>指定需要实现类别转换的列名<br>dummy_na : bool, default False<br>增加一列表示空缺值，如果False就忽略空缺值<br>drop_first : bool, default False<br>获得k中的k-1个类别值，去除第一个</p>
+<pre><code>![在这里插入图片描述](https://img-blog.csdnimg.cn/20181113103155941.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1MDY0NjM1,size_16,color_FFFFFF,t_70)
+
+- 离散特征的取值有大小的意义，比如size:[X,XL,XXL],那么就使用数值的映射{X:1,XL:2,XXL:3}
+</code></pre><p>df = pd.DataFrame([<br>            [‘green’, ‘M’, 10.1, ‘class1’],<br>            [‘red’, ‘L’, 13.5, ‘class2’],<br>            [‘blue’, ‘XL’, 15.3, ‘class1’]])  </p>
+<p>df.columns = [‘color’, ‘size’, ‘prize’, ‘class label’]<br>size_mapping = {<br>           ‘XL’: 3,<br>           ‘L’: 2,<br>           ‘M’: 1}<br>df[‘size’] = df[‘size’].map(size_mapping)  </p>
+<pre><code>- 然后再将更改后的数据加入到原数据中：（用concat函数）
+</code></pre><p>pd.concat(objs, axis=0, join=’outer’, join_axes=None, ignore_index=False,keys=None, levels=None, names=None, verify_integrity=False)<br>1， axis=0, 对行操作    axis=1， 对列操作</p>
+<ol start="2">
+<li>join=’outer’, 连接各个数据    join=’inner’,只取各个数据的公共部分</li>
+<li>join_axes=[df1.index], 保留与df1的行标签一样的数据，配合axis=1一起用<br>join_axes=[df1.columns]，保留与df1的列标签一样的数据，不要添加axis=1</li>
+<li>ignore_index=False, 保留原索引    ignore_index=True,忽略原索引并生成新索引</li>
+<li>keys=[‘x’, ‘y’, ‘z’] 对组成的每个df重新添加个索引<pre><code></code></pre></li>
+</ol>
+<p>运行代码之后得到如图所示：</p>
+<pre><code>#将数据转化为数值型
+dummies_Cabin = pd.get_dummies(train[&#39;Cabin&#39;], prefix= &#39;Cabin&#39;)
+dummies_Embarked = pd.get_dummies(train[&#39;Embarked&#39;], prefix= &#39;Embarked&#39;)
+dummies_Sex = pd.get_dummies(train[&#39;Sex&#39;], prefix= &#39;Sex&#39;) 
+dummies_Pclass = pd.get_dummies(train[&#39;Pclass&#39;], prefix= &#39;Pclass&#39;)
+
+df = pd.concat([train, dummies_Cabin, dummies_Embarked, dummies_Sex, dummies_Pclass], axis=1)
+#axis 删除列；inplace代表删除后直接替换该值
+df.drop([&#39;Pclass&#39;, &#39;Name&#39;, &#39;Sex&#39;, &#39;Ticket&#39;, &#39;Cabin&#39;, &#39;Embarked&#39;], axis=1, inplace=True)</code></pre><p><img src="https://img-blog.csdnimg.cn/20181113130928831.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1MDY0NjM1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ol start="4">
+<li>特征归一化：（sklearn.preprocessing.StandardScaler() ====scaler）</li>
+</ol>
+<pre><code>#归一化
+import sklearn.preprocessing as preprocessing
+scaler = preprocessing.StandardScaler()
+
+#age_scale_param = scaler.fit(df[&#39;Age&#39;].values.reshape(-1,1))
+df[&#39;Age_scaled&#39;] = scaler.fit_transform(df[&#39;Age&#39;].values.reshape(-1,1))
+#fare_scale_param = scaler.fit(df[&#39;Fare&#39;].values.reshape(-1,1))
+df[&#39;Fare_scaled&#39;] = scaler.fit_transform(df[&#39;Fare&#39;].values.reshape(-1,1))</code></pre><p>被调用的方法<br>fit(X,y=None):计算输入数据各特征的平均值，标准差已经之后的缩放系数<br>X 为array 或者 稀疏矩阵，[样本数量，样本特征数]<br>y: 传入为了使得和Pipeline兼容<br>就可以直接查询相关系数，scale.mean_</p>
+<p>scale_： 缩放比例，同时也是标准差<br>mean_： 每个特征的平均值<br>var_:每个特征的方差<br>n_sample_seen_:样本数量，可以通过patial_fit 增加</p>
+<p>fit_transform(X,y=None,**fit_params): 通过fit_params调整数据X,y得到一个调整后的X<br>X 为array：训练集<br>y 为标签<br>返回一个改变后的X</p>
+<h2 id="四、逻辑回归建模"><a href="#四、逻辑回归建模" class="headerlink" title="四、逻辑回归建模"></a>四、逻辑回归建模</h2><p>LogisticRegression(C=1.0, penalty=’l1’, tol=1e-6)</p>
+<ul>
+<li>penalty：惩罚项，str类型，可选参数为l1和l2，默认为l2。用于指定惩罚项中使用的规范。newton-cg、sag和lbfgs求解算法只支持L2规范。L1G规范假设的是模型的参数满足拉普拉斯分布，L2假设的模型参数满足高斯分布，所谓的范式就是加上对参数的约束，使得模型更不会过拟合(overfit)，但是如果要说是不是加了约束就会好，这个没有人能回答，只能说，加约束的情况下，理论上应该可以获得泛化能力更强的结果。</li>
+<li>c：正则化系数λ的倒数，float类型，默认为1.0。必须是正浮点型数。像SVM一样，越小的数值表示越强的正则化。</li>
+<li>tol：停止求解的标准，float类型，默认为1e-4。就是求解到多少的时候，停止，认为已经求出最优解<br><a href="https://blog.csdn.net/jark_/article/details/78342644" target="_blank" rel="noopener">参数详解</a></li>
+</ul>
+<pre><code>from sklearn import linear_model
+train_df = df.filter(regex=&#39;Survived|Age_.*|SibSp|Parch|Fare_.*|Cabin_.*|Embarked_.*|Sex_.*|Pclass_.*&#39;)
+train_np = train_df.as_matrix()
+y = train_np[:,0]
+X = train_np[:,1:]
+clf = linear_model.LogisticRegression(C=1.0, penalty=&#39;l1&#39;, tol=1e-6)
+clf.fit(X,y)</code></pre><h2 id="五、小结："><a href="#五、小结：" class="headerlink" title="五、小结："></a>五、小结：</h2><p>以上为baseling的结果，只是对数据进行了处理，并且直接放入逻辑回归模型中，参数也没有进行调整；一共10个特征，提取的特征只有（Age_.<em>|SibSp|Parch|Fare_.</em>|Cabin_.<em>|Embarked_.</em>|Sex_.<em>|Pclass_.</em>）8个<br>（查看数据info等选取特征值、缺失值少的随机森林填补，缺失多的可以将是否缺失作为一个特征、特征进行onehot处理（get_dummies）、范围大的数值型数据进行归一化处理、训练集放入逻辑回归中、测试集同样处理后predict）<br><img src="https://img-blog.csdnimg.cn/20181114214300495.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1MDY0NjM1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="六、进阶"><a href="#六、进阶" class="headerlink" title="六、进阶"></a>六、进阶</h2><ol>
+<li>猜测：</li>
+</ol>
+<ul>
+<li>name、ticket 属性没有用，主要是数据共同点少</li>
+<li>预测的年龄值可能并不准确，毕竟年龄与其他属性不一定有什么关系，而且年龄大的和小的理论最容易获救，所以这个关系应该不是线性的</li>
+</ul>
+<ol start="2">
+<li>查看逻辑回归系数（系数越大正相关，负即位负相关）<pre><code>a = pd.DataFrame({&quot;columns&quot;:list(train_df.columns)[1:], &quot;coef&quot;:list(clf.coef_.T)})
+print(a)
+              coef      columns
+0   [-0.344235547502]        SibSp
+1   [-0.104916059432]        Parch
+2               [0.0]     Cabin_No
+3    [0.902108372278]    Cabin_Yes
+4               [0.0]   Embarked_C
+5               [0.0]   Embarked_Q
+6   [-0.417264091571]   Embarked_S
+7     [1.95657115809]   Sex_female
+8    [-0.67742062132]     Sex_male
+9    [0.341158456052]     Pclass_1
+10              [0.0]     Pclass_2
+11   [-1.19413034174]     Pclass_3
+12  [-0.523766665956]   Age_scaled
+13  [0.0844348218785]  Fare_scaled</code></pre>SibSp、Parch：略微的负相关<br>Cabin：有的更容易获救<br>Embarked：影响不大<br>sex :  female影响明显<br>Pclass ：1舱使获救升高，3舱大大降低<br>Age：负相关，年龄越小越好<br>Fare：很小的正相关</li>
+</ol>
+<p>3.交叉验证（cross validation） </p>
+<ul>
+<li>cross_val_score（测试集进行循环5次交叉验证）</li>
+</ul>
+<pre><code>sklearn.cross_validation.cross_val_score
+(estimator, X, y=None, scoring=None, cv=None, n_jobs=1, verbose=0, fit_params=None, pre_dispatch=‘2*n_jobs’)
+estimator：数据对象 
+X：数据 
+y：预测数据 
+soring：调用的方法
+cv：交叉验证生成器或可迭代的次数 
+n_jobs：同时工作的cpu个数（-1代表全部）
+verbose：详细程度
+fit_params：传递给估计器的拟合方法的参数
+pre_dispatch：控制并行执行期间调度的作业数量。减少这个数量对于避免在CPU发送更多作业时CPU内存消耗的扩大是有用的。该参数可以是：</code></pre><pre><code>from sklearn import cross_validation
+clf = linear_model.LogisticRegression(C=1.0, penalty=&#39;l1&#39;, tol=1e-6)
+xcross = train_np[:,1:]
+ycross = train_np[:,0]
+print(cross_validation.cross_val_score(clf, xcross, ycross, cv=5))</code></pre><p>通过交叉验证，训练集分成5份，然后4分作为训练集，1份作为测试集，检验训练模型的结果，输出为：<br>[0.81564246 0.81005587 0.78651685 0.78651685 0.81355932]</p>
+<ul>
+<li>train_test_split（将矩阵随机划分为训练子集和测试子集，并返回划分好的训练集测试集样本和训练集测试集标签。）查看那些预测错的案例<pre><code>X_train,X_test, y_train, y_test =cross_validation.train_test_split(train_data,train_target,test_size=0.3, random_state=0)
+参数解释：
+</code></pre></li>
+</ul>
+<p>train_data：被划分的样本特征集</p>
+<p>train_target：被划分的样本标签</p>
+<p>test_size：如果是浮点数，在0-1之间，表示样本占比；如果是整数的话就是样本的数量</p>
+<p>random_state：是随机数的种子。</p>
+<p>随机数种子：其实就是该组随机数的编号，在需要重复试验的时候，保证得到一组一样的随机数。比如你每次都填1，其他参数一样的情况下你得到的随机数组是一样的。但填0或不填，每次都会不一样。<br>随机数的产生取决于种子，随机数和种子之间的关系遵从以下两个规则：种子不同，产生不同的随机数；种子相同，即使实例不同也产生相同的随机数。</p>
+<pre><code>将数据按训练集、测试集 7：3分开，然后训练出的模型，预测结果与真实比较，查看预测错的案例</code></pre><p>split_train, split_cv = cross_validation.train_test_split(df, test_size=0.3, random_state=0)<br>train_df0 = split_train.filter(regex=’Survived|Age_.<em>|SibSp|Parch|Fare_.</em>|Cabin_.<em>|Embarked_.</em>|Sex_.<em>|Pclass_.</em>‘)</p>
+<h1 id="生成模型"><a href="#生成模型" class="headerlink" title="生成模型"></a>生成模型</h1><p>clf = linear_model.LogisticRegression(C=1.0, penalty=’l1’, tol=1e-6)<br>clf.fit(train_df0.as_matrix()[:,1:], train_df0.as_matrix()[:,0])</p>
+<h1 id="对cross-validation数据进行预测"><a href="#对cross-validation数据进行预测" class="headerlink" title="对cross validation数据进行预测"></a>对cross validation数据进行预测</h1><p>cv_df = split_cv.filter(regex=’Survived|Age_.<em>|SibSp|Parch|Fare_.</em>|Cabin_.<em>|Embarked_.</em>|Sex_.<em>|Pclass_.</em>‘)<br>predictions = clf.predict(cv_df.as_matrix()[:,1:])</p>
+<p>origin_data_train = pd.read_csv(“train.csv”)<br>bad_cases = origin_data_train.loc[origin_data_train[‘PassengerId’].isin(split_cv[predictions != cv_df.as_matrix()[:,0]][‘PassengerId’].values)]</p>
+<pre><code>通过对错误案例的分析，来对特征工程进行改进，再进行验证
+
+
+
+
+
+## sklearn 模型选择(https://scikit-learn.org/stable/index.html)
+- KFLOD（用于交叉验证的函数。在机器学习中，样本量不充足时，通常使用交叉训练验证）
+—— 将A分为K等份，1个最为测试集，其他作为训练集
+
+KFold(n_splits=3, shuffle=False, random_state=None) 
+n_splits：表示划分几等份
+
+shuffle：在每次划分时，是否进行洗牌
+
+①若为Falses时，其效果等同于random_state等于整数，每次划分的结果相同
+
+②若为True时，每次划分的结果都不一样，表示经过洗牌，随机取样的
+
+random_state：随机种子数
+
+KFold(n, n_folds=3, shuffle=False, random_state=None)
+n为总数
+n_folds为分为多少个交叉验证集
+shuffle为是否随机
+random_state设置随机因子
+
+ - 线性回归、逻辑回归
+ 直接输入fit（特征值，lable值）然后predict（训练集特征值）</code></pre><pre><code>#线性回归
+from sklearn.linear_model import LinearRegression
+#交叉验证
+from sklearn.cross_validation import KFold
+alg.fit(tr_pre,tr_tar)
+#te行的所有列
+te_pre = (train[predictors].iloc[te,:])
+te_tar = alg.predict(te_pre)</code></pre><pre><code></code></pre>
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="https://zqfang666.github.io" class="b-link-green">DayByDay</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2019/03/07/kaggle 入门 泰坦尼克 处理过程/" class="b-link-green">kaggle 入门 泰坦尼克 处理过程</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/03/07/今日头条后端笔试题（2018.12刷）/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="今日头条后端笔试题（2018.12刷）">
+                        
+                        <span class="card-title">今日头条后端笔试题（2018.12刷）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">2018年12月参加头条武汉open day（后台）
+有2，3，5，三种硬币，输入每个硬币的个数，和要凑够的钱数，求最少需要的硬币球
+演唱会，有n个歌手，开始时间s，结束时间e，求最多可听几场，结束时间不可以等于下一场开始时间。
+一个点餐系</div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-03-07
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Coding/" class="post-category" target="_blank">
+                                    Coding
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2018/11/27/Leetcode   (10月)/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="Leetcode(10月)">
+                        
+                        <span class="card-title">Leetcode(10月)</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">10月份01题TWO SUM（10.6）
+
+python暴力法报错运行时间超时，时间复杂度O(n^2)，空间复杂度O(1)l = len(nums)
+      for i in range(l):
+          if nums[i]</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-11-27
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Coding/" class="post-category" target="_blank">
+                                    Coding
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Leetcode/" target="_blank">
+                        <span class="chip bg-color">Leetcode</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+    </div>
+    <div class="col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="https://blinkfox.github.io/" target="_blank">Blinkfox</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">30.1k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/zqfang666" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:zqfang321@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=847368807" class="tooltipped" data-tooltip="QQ联系我: 847368807" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input" autofocus="">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

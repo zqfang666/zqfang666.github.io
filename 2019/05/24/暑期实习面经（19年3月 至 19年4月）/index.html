@@ -1,0 +1,918 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="暑期实习面经（19年3月至19年4月）, DayByDay">
+    <meta name="description" content="2019.4.1 蘑菇街+东方财富项目中是否用到多线程秒杀系统内部如何实现redis与mysql的同步对于分布式的了解：讲讲Java中的长短连接（可以实现以下）
+长连接、短链接（Socket实现）  http长短连接适合的 长：客户端服务端">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>暑期实习面经（19年3月至19年4月） | DayByDay</title>
+    <link rel="icon" type="image/jpeg" href="/favicon.jpg">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+</head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo.jpg" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">DayByDay</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.jpg" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">DayByDay</div>
+        <div class="logo-desc">
+            
+            Java成长之路
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+    </ul>
+
+    <div class="social-link">
+    <a href="https://github.com/zqfang666" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:zqfang321@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=847368807" class="tooltipped" data-tooltip="QQ联系我: 847368807" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        暑期实习面经（19年3月至19年4月）
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+</style>
+<div class="row">
+    <div class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/面试/" class="post-category" target="_blank">
+                                面试
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-05-24
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        7.6k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        27 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="2019-4-1-蘑菇街-东方财富"><a href="#2019-4-1-蘑菇街-东方财富" class="headerlink" title="2019.4.1 蘑菇街+东方财富"></a>2019.4.1 蘑菇街+东方财富</h1><h3 id="项目中是否用到多线程"><a href="#项目中是否用到多线程" class="headerlink" title="项目中是否用到多线程"></a>项目中是否用到多线程</h3><h3 id="秒杀系统内部如何实现redis与mysql的同步"><a href="#秒杀系统内部如何实现redis与mysql的同步" class="headerlink" title="秒杀系统内部如何实现redis与mysql的同步"></a>秒杀系统内部如何实现redis与mysql的同步</h3><h3 id="对于分布式的了解："><a href="#对于分布式的了解：" class="headerlink" title="对于分布式的了解："></a>对于分布式的了解：</h3><h3 id="讲讲Java中的长短连接（可以实现以下）"><a href="#讲讲Java中的长短连接（可以实现以下）" class="headerlink" title="讲讲Java中的长短连接（可以实现以下）"></a>讲讲Java中的长短连接（<a href="https://baike.baidu.com/item/socket/281150?fr=aladdin" target="_blank" rel="noopener">可以实现以下</a>）</h3><ul>
+<li>长连接、短链接（Socket实现）  http长短连接适合的<pre><code> 长：客户端服务端只用一个socket，长期保持
+ 适合于：适合点对点通信，点对点通信；数据库的连接就是长连接；
+ 长连接通过心跳包来实现保活、断线</code></pre></li>
+</ul>
+<ul>
+<li>短：每次请求，都新建一个socket<br>web网站的服务器都是短链接，因为上万个请求要处理，同时都是长连接的话，并发量大。</li>
+</ul>
+<p>（已解决）</p>
+<h3 id="线程join方法："><a href="#线程join方法：" class="headerlink" title="线程join方法："></a>线程join方法：</h3><p><img src="https://img-blog.csdnimg.cn/201904012246357.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1MDY0NjM1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="Java内存模型（JMM）："><a href="#Java内存模型（JMM）：" class="headerlink" title="Java内存模型（JMM）："></a>Java内存模型（JMM）：</h3><ul>
+<li>作用：定义程序中各个变量的访问规则，在JVM中将变量存储到内存中和从内存中取出变量这样的底层细节。</li>
+<li>分布：所有的变量都存储在主内存（Main Memory）中；每个线程有自己的工作内存（Working Memory），<br><strong>工作内存</strong>（高速缓存、寄存器） 中保存了该线程使用的变量的主内存的副本拷贝，线程对变量的所有操作都是在工作内存中进行，而不是直接读写主内存的（volatile任然有工作内存，但是内部机制像是主存读取）。不同的线程之间也无法直接访问对方工作内存中的变量，线程之间的传递都需要通过主内存。</li>
+</ul>
+<p>建立围绕着“原子性”(操作要么全部执行要么全部不执行)、“可见性”（线程对共享变量修改，其他立马可以看到）、“有序性”</p>
+<p><img src="https://img-blog.csdnimg.cn/20190406225913760.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1MDY0NjM1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="秒杀系统（如何处理高并发问题）"><a href="#秒杀系统（如何处理高并发问题）" class="headerlink" title="秒杀系统（如何处理高并发问题）"></a>秒杀系统（如何处理高并发问题）</h3><p>稳：保证秒杀活动顺利完成，即秒杀商品顺利地卖出去<br>准：数据的一致性<br>快：说系统的性能要足够高，否则你怎么支撑这么大的流量呢？不光是服务端要做极致的性能优化，而且在整个请求链路上都要做协同的优化，每个地方快一点，整个系统就完美了。</p>
+<ul>
+<li><p>业务：卖家查询、买家下订单</p>
+</li>
+<li><p>前端浏览器秒杀页面=》中间代理服务=》后端服务层=》数据库层</p>
+</li>
+<li><p>前端：<br>1、静态资源缓存 </p>
+<p>页面静态化<br>CDN页面缓存，也可以用redis缓存渲染的页面<br>2、限流方法</p>
+</li>
+</ul>
+<p>使用验证码，防止机器人、爬虫以及分散用户请求<br>禁止重复提交 ：用户提交之后按钮置灰，禁止重复提交 </p>
+<ul>
+<li>服务层:</li>
+</ul>
+<p>1.业务分离:将秒杀业务系统和其他业务分离，单独放在高配服务器上，可以集中资源对访问请求抗压。</p>
+<p>2.采用消息队列缓存请求：将大流量请求写到消息队列缓存，利用服务器根据自己的处理能力主动到消息缓存队列中抓取任务处理请求，数据库层订阅消息减库存，减库存成功的请求返回秒杀成功，失败的返回秒杀结束。</p>
+<p>3.利用缓存应对读请求：对于读多写少业务，大部分请求是查询请求，所以可以读写分离，利用缓存分担数据库压力。</p>
+<p>4.利用缓存应对写请求：缓存也是可以应对写请求的，可把数据库中的库存数据转移到Redis缓存中，所有减库存操作都在Redis中进行，然后再通过后台进程把Redis中的用户秒杀请求同步到数据库中。</p>
+<h3 id="hashmap-中-key相等怎么办"><a href="#hashmap-中-key相等怎么办" class="headerlink" title="hashmap 中 key相等怎么办"></a><a href="https://blog.csdn.net/intersting/article/details/72627353" target="_blank" rel="noopener">hashmap 中 key相等怎么办</a></h3><p>考察理解hashmap的取值的流程，先通过hashcode找，再由equals去找<br>重写equals hashcode </p>
+<h3 id="Maven的基本命令"><a href="#Maven的基本命令" class="headerlink" title="Maven的基本命令"></a>Maven的基本命令</h3><h3 id="第一个项目搞懂："><a href="#第一个项目搞懂：" class="headerlink" title="第一个项目搞懂："></a>第一个项目搞懂：</h3><ol>
+<li><p>srevice（生产计划，派工单，设备，原材料） 写各种服务接口，包括各种方法<br><img src="https://img-blog.csdnimg.cn/20190407220112781.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1MDY0NjM1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</li>
+<li><p>ServiceImpl 写各种服务的实现类<br><img src="https://img-blog.csdnimg.cn/20190407220716600.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1MDY0NjM1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</li>
+<li><p>sql语言写好后通过——getListBySQLToMap来解决<br><img src="https://img-blog.csdnimg.cn/20190407221104402.png" alt="在这里插入图片描述"><br>sessionFactory 属于Hibernate对JDBC进行了非常轻量级的对象封装，<br>session表示应用程序和数据库的一次交互；包含了一般的持久化方法（CRUD）；<br>createSQLQuery 获取 Query对象     query.list获得查找结果</p>
+</li>
+<li><p>——rest文件</p>
+</li>
+</ol>
+<p>注解实现（SpringMVC）</p>
+<ul>
+<li><p>@RestController 是@controller和@responsebody的结合，返回的是一个JSON对象 。@controller是返回视图，</p>
+</li>
+<li><p>@Resource</p>
+</li>
+<li><p>@RequestMapping  调用该方法的路径，以及请求方法get、post</p>
+</li>
+</ul>
+<h3 id="分页的实现"><a href="#分页的实现" class="headerlink" title="分页的实现"></a>分页的实现</h3><p>写一个 PageQEntity 实体类。<br><img src="https://img-blog.csdnimg.cn/20190419225512556.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1MDY0NjM1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="jdbc-mybatis-hibernate各自优缺点及区别："><a href="#jdbc-mybatis-hibernate各自优缺点及区别：" class="headerlink" title="jdbc,mybatis,hibernate各自优缺点及区别："></a>jdbc,mybatis,hibernate各自优缺点及区别：</h3><ol>
+<li><p>JDBC：<br>我们平时使用jdbc进行编程，大致需要下面几个步骤：<br>1，使用jdbc编程需要连接数据库，注册驱动和数据库信息<br>2，操作Connection，打开Statement对象<br>3，通过Statement对象执行SQL，返回结果到ResultSet对象<br>4，使用ResultSet读取数据，然后通过代码转化为具体的POJO对象<br>5，关闭数据库相关的资源<br>jdbc的缺点：<br>一：工作量比较大，需要连接，然后处理jdbc底层事务，处理数据类型，还需要操作Connection，Statement对象和ResultSet对象去拿数据并关闭他们。<br>二：我们对jdbc编程可能产生的异常进行捕捉处理并正确关闭资源</p>
+</li>
+<li><p>Hibernate：<br> Hibernate是建立在若干POJO通过xml映射文件（或注解）提供的规则映射到数据库表上的。我们可以通过POJO直接操作数据库的数据，他提供的是一种全表映射的模型。相对而言，Hibernate对JDBC的封装程度还是比较高的，我们已经不需要写SQL，只要使用HQL语言就可以了。<br> 使用Hibernate进行编程有以下好处：<br> 1，消除了代码的映射规则，它全部分离到了xml或者注解里面去配置。<br> 2，无需在管理数据库连接，它也配置到xml里面了。<br> 3，一个会话中不需要操作多个对象，只需要操作Session对象。<br> 4，关闭资源只需要关闭一个Session便可。<br> 这就是Hibernate的优势，在配置了映射文件和数据库连接文件后，Hibernate就可以通过<strong>Session操作，非常容易，消除了jdbc带来的大量代码，大大提高了编程的简易性和可读性</strong>。Hibernate还提供了级联，缓存，映射，一对多等功能。Hibernate是全表映射，通过HQL去操作pojo进而操作数据库的数据。</p>
+<p> Hibernate的缺点：<br> 1，全表映射带来的不便，比如更新时需要发送所有的字段。<br> 2，无法根据不同的条件组装不同的SQL。<br> 3，对多表关联和复杂的sql查询支持较差，需要自己写sql，返回后，需要自己将数据封装为pojo。<br> 4，不能有效的支持存储过程。<br> 5，虽然有HQL，但是性能较差，大型互联网系统往往需要优化sql，而hibernate做不到。</p>
+</li>
+<li><p>Mybatis：<br> 为了解决Hibernate的不足，Mybatis出现了，Mybatis是半自动的框架。之所以称它为半自动，是因为它需要手工匹配提供POJO，sql和映射关系，而全表映射的Hibernate只需要提供pojo和映射关系即可。<br>Mybatis需要提供的映射文件包含了一下三个部分：sql，映射规则，pojo。在Mybatis里面你需要自己编写sql，虽然比Hibernate配置多，但是Mybatis可以配置动态sql，解决了hibernate表名根据时间变化，不同条件下列不一样的问题，同时你也可以对sql进行优化，通过配置决定你的sql映射规则，也能支持存储过程，所以对于一些复杂和需要优化性能的sql查询它就更加方便。Mybatis几乎可以做到jdbc所有能做到的事情。</p>
+</li>
+<li><p>区别<br>1）从<strong>层次</strong>上看，JDBC是较底层的持久层操作方式，而Hibernate和MyBatis都是在JDBC的基础上进行了封装使其更加方便程序员对持久层的操作。<br>2）从<strong>功能</strong>上看，JDBC就是简单的建立数据库连接，然后创建statement，将sql语句传给statement去执行，如果是有返回结果的查询语句，会将查询结果放到ResultSet对象中，通过对ResultSet对象的遍历操作来获取数据；Hibernate是将数据库中的数据表映射为持久层的Java对象，对sql语句进行修改和优化比较困难；MyBatis是将sql语句中的输入参数和输出参数映射为java对象，sql修改和优化比较方便.<br>3）从<strong>使用</strong>上看，如果进行底层编程，而且对性能要求极高的话，应该采用JDBC的方式；如果要对数据库进行完整性控制的话建议使用Hibernate；如果要灵活使用sql语句的话建议采用MyBatis框架。</p>
+</li>
+</ol>
+<h5 id="AJAX请求："><a href="#AJAX请求：" class="headerlink" title="AJAX请求："></a>AJAX请求：</h5><p><img src="https://img-blog.csdnimg.cn/20190407215913653.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1MDY0NjM1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="4-2-深圳小公司"><a href="#4-2-深圳小公司" class="headerlink" title="4.2 深圳小公司"></a>4.2 深圳小公司</h1><h3 id="框架的认识-："><a href="#框架的认识-：" class="headerlink" title="框架的认识 ："></a>框架的认识 ：</h3><ul>
+<li>Dao层：数据持久层，负责与数据库连接的任务封装在此。DAO层的设计首先是设计DAO的接口，然后在Spring的配置文件中定义此接口的实现类，然后就可在模块中调用此接口来进行数据业务的处理，而不用关心此接口的具体实现类是哪个类，显得结构非常清晰，DAO层的数据源配置，以及有关数据库连接的参数都在Spring的配置文件中进行配置。 （数据库访问层）</li>
+</ul>
+<ul>
+<li><p>Service层：Service层主要负责业务模块的逻辑应用设计。（业务层）</p>
+</li>
+<li><p>Controller层:Controller层负责具体的业务模块流程的控制，在此层里面要调用Serice层的接口来控制业务流程，控制的配置也同样是在Spring的配置文件里面进行（轻业务逻辑——参数检验，可以轻易更换接口类型）</p>
+</li>
+</ul>
+<p>接口属于哪一层：</p>
+<h3 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a><strong>MVC</strong></h3><p>Model：模型承载数据，并对用户提交请求进行计算。一类：数据承载Bean；一类：业务处理Bean（service、Dao）；<br>View：视图，实现用户交互。（JSP）<br>Controller：控制器，用于将用户请求转发给相应的Model进行处理，处理model结果向用户响应<br><img src="https://img-blog.csdnimg.cn/20190417172948971.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1MDY0NjM1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="SSM（SpringMVC-Spring-MyBatis）与SSH（Struts2-Hibernate-Spring）"><a href="#SSM（SpringMVC-Spring-MyBatis）与SSH（Struts2-Hibernate-Spring）" class="headerlink" title="SSM（SpringMVC+Spring+MyBatis）与SSH（Struts2+Hibernate+Spring）"></a>SSM（SpringMVC+Spring+MyBatis）与SSH（Struts2+Hibernate+Spring）</h3><p>SSM下的开发流程：<br>1.先写实体类entity，定义对象的属性，（可以参照数据库中表的字段来设置，数据库的设计应该在所有编码开始之前）。<br>2.写Mapper.xml（Mybatis），其中定义你的功能，对应要对数据库进行的那些操作，比如 insert、selectAll、selectByKey、delete、update等。<br>3.写Mapper.java，将Mapper.xml中的操作按照id映射成Java函数。<br>4.写Service.java，为控制层提供服务，接受控制层的参数，完成相应的功能，并返回给控制层。<br>5.写Controller.java，连接页面请求和服务层，获取页面请求的参数，通过自动装配，映射不同的URL到相应的处理函数，并获取参数，对参数进行处理，之后传给服务层。<br>6.写JSP页面调用，请求哪些参数，需要获取什么数据。<br>DataBase ===&gt; Entity ===&gt; Mapper.xml ===&gt; Mapper.Java ===&gt; Service.java ===&gt; Controller.java ===&gt; Jsp.</p>
+<p><a href="https://juejin.im/post/5a715f4ef265da3e5a57935f" target="_blank" rel="noopener">https://juejin.im/post/5a715f4ef265da3e5a57935f</a><br><a href="https://blog.csdn.net/qq_34771403/article/details/63694813" target="_blank" rel="noopener">https://blog.csdn.net/qq_34771403/article/details/63694813</a></p>
+<ul>
+<li>SpringMVC作为view层的实现者，完成用户的请求，其中controller作为整个应用的控制器完成请求及相应。</li>
+<li>Mybatis：作为Dao层的实现者，完成对数据的CRUD</li>
+<li>Spring：以整个应用的大管家，所有的Bean生命周期行为，均由Spring管理，完成对象的创建、初始化、销毁、及对象间关联。<br><img src="https://img-blog.csdnimg.cn/20190417172930302.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1MDY0NjM1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+</ul>
+<p>工作流程：</p>
+<ol>
+<li>用户通过view页面向服务端，提出请求。（表单请求，Ajax请求，超链接请求等待）</li>
+<li>服务端Controller受到请求后进行解析，找到相应的Model对请求处理</li>
+<li>Model处理完成后，再将结果交给Controller；</li>
+<li>Controller接到处理后，根据结果找到要返回的view页面。页面渲染后</li>
+</ol>
+<p>SpringMVC：<br>1.客户端发送请求到DispacherServlet（分发器）<br>2.由DispacherServlet控制器查询HanderMapping，找到处理请求的Controller<br>3.Controller调用业务逻辑处理后，返回ModelAndView<br>4.DispacherSerclet查询视图解析器，找到ModelAndView指定的视图<br>5.视图负责将结果显示到客户端</p>
+<pre><code>15：struts2和springmvc的区别
+答：（1）核心控制器不同。Struts2是filter过滤器，而springmvc是servlet。
+
+（2）控制器实例不同。Springmvc相比strus2要快一些。（理论上）Struts2是基于对象，所以它是多实例的，而springmvc是基于方法的，所以它是单例的，但是应该避免全局变量的修改，这样会导致线程安全问题。
+
+（3）管理方式不同。大部分企业都使用Spring，而Springmvc是spring的一个模块，所以集成更加简单容易，而且提高了全注解的开发形式。而strus2需要采用XML的形式进行配置来进行管理（虽然也可以采用注解，但是公司一般都不会使用）。
+
+（4）参数传递不同。Struts2是通过值栈（ValueStack）进行传递和接受，而Springmvc是通过方法的参数来接受，这样Springmvc更加高效。
+
+（5）学习程度不同。Struts2存在很多技术点，比如拦截器，值栈，以及OGML表达式，学习成本高，而Springmvc比较简单，上手快。
+
+（6）Interrcpter的实现机制不同。Strus2有自己的拦截器的机制，而Springmvc是通过AOP的形式，这样导致strus2的配置文件比springmvc更加庞大。
+
+（7）对于Ajax请求不同。Springmvc可以根据注解@responseBody 来对ajax请求执行返回json格式数据，而strus2需要根据插件进行封装返回数据。</code></pre><h3 id="这样设计的好处（Mark）"><a href="#这样设计的好处（Mark）" class="headerlink" title="这样设计的好处（Mark）"></a>这样设计的好处（Mark）</h3><h3 id="什么是servlet"><a href="#什么是servlet" class="headerlink" title="什么是servlet"></a>什么是servlet</h3><p>是一个接口。运行在 Web 服务器或应用服务器上的程序，它是作为来自 Web 浏览器或其他 HTTP 客户端的请求和 HTTP 服务器上的数据库或应用程序之间的中间层。收集来自网页表单的用户输入，呈现来自数据库或者其他源的记录，还可以动态创建网页。<br>生命周期：init（初始化）；service（）；destroy（）</p>
+<h1 id="2019-4-8-蘑菇街二面："><a href="#2019-4-8-蘑菇街二面：" class="headerlink" title="2019.4.8 蘑菇街二面："></a>2019.4.8 蘑菇街二面：</h1><h3 id="CAS机制除了乐观锁还有什么地方用到，ConcurrentHashMap中CAS怎么用的"><a href="#CAS机制除了乐观锁还有什么地方用到，ConcurrentHashMap中CAS怎么用的" class="headerlink" title="CAS机制除了乐观锁还有什么地方用到，ConcurrentHashMap中CAS怎么用的"></a>CAS机制除了乐观锁还有什么地方用到，ConcurrentHashMap中CAS怎么用的</h3><p>ConcurrentHashMap，1.8，内部大量采用CAS机制以及Synchronized，抛弃了Segment，采用Node，volatile属性实现可见性。锁的粒度也变小了，对每一个Node加锁。<br>CAS举例：在put操作里面，<br>(1)判断key，value是否为null,是的话抛异常。<br>(2)table长度为0的话，重新建表。<br>(3)用CAS机制，判断当前索引的是否为空，空的话直接赋予新的当前值<br>（4）否则的话，如果当前正在扩容表帮助扩容<br>（5）否则的话，此时说明有hash冲突，且不需要帮助扩容操作。我们锁住代码块，进行插入操作，可能会遇到，相等的那就覆盖，没有就插到最后；如果是红黑树另一种操作方法。最后如果插入后大于阈值，再变为树结构。</p>
+<h3 id="进程线程"><a href="#进程线程" class="headerlink" title="进程线程"></a>进程线程</h3><ul>
+<li><p>进程：资源分配的基本单位；线程：独立调度的基本单位</p>
+<ol>
+<li>拥有资源：进程是资源分配单位，线程可以访问隶属进程</li>
+<li>调度：同一进程，线程切换不会导致进程切换，不同进程的线程切换会导致进程切换，资料消耗大。</li>
+<li>系统开销：进程创建销毁，系统为之分配回收资源，线程切换只需保存，设置寄存器内容。</li>
+</ol>
+</li>
+<li><p>进程通信：<br>管道：适用于具有亲缘关系的父子进程，命名管道也允许没有亲缘关系的<br>信号：<br>消息队列：<br>共享内存：多个进程访问同一快内存，不同进程可以及时看到对方进程中对数据的更新。<br>信号量：进程间，以及同一进程不同线程的同步手段<br>套接字：socket</p>
+<ul>
+<li>线程通信：<br>互斥量：synchronized，lock<br>信号量：semphare：允许同一时刻多个线程访问同一资源<br>事件：wait/notify</li>
+</ul>
+</li>
+</ul>
+<h3 id="死锁详细了解"><a href="#死锁详细了解" class="headerlink" title="死锁详细了解"></a>死锁详细了解</h3><ul>
+<li><p>死锁：指的两个或多个并发的进程，如果两个进程持有某种资源而又等待着其他进程释放他或他们现在保持着的资源，在未改变这种状态之前都不能向前前进。无限期的阻塞、相互等待的状态。</p>
+</li>
+<li><p>产生的四个必要条件，有一个条件得不到满足就不可能发生死锁：</p>
+</li>
+</ul>
+<ol>
+<li>互斥：至少一个资源是非共享模式，一次只允许一个进程访问</li>
+<li>占有并等待：一个进程本身就占有一个资源，同时还需要其他资源，等待其他进程释放这个资源。</li>
+<li>非抢占：别人已经有了某个资源，不能因为需要就去抢夺别人的资源</li>
+<li>循环等待：存在一个进程链，每个进程都占有下一个进程所需的至少一种资源。</li>
+</ol>
+<h4 id="死锁的解决策略"><a href="#死锁的解决策略" class="headerlink" title="死锁的解决策略"></a>死锁的解决策略</h4><ul>
+<li>忽略该问题（鸵鸟算法）</li>
+<li>检测死锁并恢复<br>检测方法：</li>
+</ul>
+<p>1.每个类型一个资源：深度优先搜索<br>2.每个类型多个资源：矩阵C+A=E<br>恢复方法：<br>1.利用抢占恢复<br>2.回滚恢复<br>3.杀死进程恢复</p>
+<ul>
+<li>破坏四个条件之一，<strong><em>预防死锁</em></strong>：</li>
+</ul>
+<ol>
+<li><p>破坏占有且等待：所有进程运行前，必须申请整个过程中所有的资源，申请到了才可以运行；允许只获得初期需要的资源，便开始运行，过程中逐渐释放使用完成的资源，然后再去请求。</p>
+</li>
+<li><p>破坏不可抢占：当一个进程持有了一些资源，请求新资源无法满足，他必须释放已经保持的所有资源。这种方法实现困难，代价很大。</p>
+</li>
+<li><p>破坏循环等待：对资源进行编号，当一个进程占有编号i的资源，下一次只能占有比她大的资源。</p>
+</li>
+</ol>
+<ul>
+<li>仔细对资源动态分配，从而<strong>避免死锁</strong>（比死锁预防的限制要少）<strong>银行家算法</strong>：</li>
+</ul>
+<ol>
+<li><p>有序资源分配法（通过破坏环路条件来实现）：将所有资源编号，申请时必须上升的次序。</p>
+</li>
+<li><p>银行家算法：可利用资源向量Available、最大需求矩阵Max、分配矩阵(当前已分配)Allocation、需求矩阵Need=Max-Allocation。request代表进程的一次请求资源量。Finish表示某个进程的状态</p>
+<p><strong>安全状态检测算法</strong>：（1）不断扫面所有进程，如果finish=false，need&lt;Allocation，满足第2否则第3 （2）满足说明该进程可以完成，假设已经完成，银行收回了给进程的资源。Available+=Allocation，并且另Finish=true。（3）如果此时所有都是true说明安全，否则就是不安全的</p>
+<p><strong>资源请求算法</strong>：（1）如果需求request&gt;Need，拒绝（2）如果request&gt;Available，拒绝；（3）以上都不满足分配资源：Available-=request；Need-=request；Allocation+=request。<br>然后用安全状态检测算法，检测这次请求后系统是否安全，安全就生效，不安全就推迟。</p>
+<ul>
+<li>死锁检测：就是相当于安全状态检测算法</li>
+<li>死锁解除：撤销或者挂起一些进程，以便回收一些资源，再将资源分配给处于阻塞状态的线程。进程回退发、</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>Java中的死锁检测：<br>Jconsole： （JAVA_HOME/bin目录下）可以连接本地或远程的JVM，查看内存、线程、类、JVM概要。在线程菜单可以检测死锁，查看死锁原因。<br>Jstack：JDK自带的命令行工具，用于线程Dump分析(Dump文件是进程的内存镜像。保存的是进程的执行状态信息)<br>1、jps查看进程信息<br>2、找到要调试的进程号，jstack -l pid  可以得到死锁位置<h3 id="vector-和-arraylist"><a href="#vector-和-arraylist" class="headerlink" title="vector 和 arraylist"></a>vector 和 arraylist</h3></li>
+<li>vector对集合元素操作都加了Synchronize实现同步</li>
+<li>扩容不一样，vector扩容增大一倍，arraylist默认增大0.5倍，同时可以修改的增大多少有一个参数，arraylist不可以设置增量大小</li>
+</ul>
+<h3 id="volatile-到底实现了哪些特性："><a href="#volatile-到底实现了哪些特性：" class="headerlink" title="volatile 到底实现了哪些特性："></a>volatile 到底实现了哪些特性：</h3><p>无法保证原子性，可在一定程度保证有序，实现了可见性。</p>
+<h3 id="物理内存、虚拟内存区别："><a href="#物理内存、虚拟内存区别：" class="headerlink" title="物理内存、虚拟内存区别："></a>物理内存、虚拟内存区别：</h3><p>物理内存就是实际的内存，在cpu中指的是实际的寻址空间大小，32位就是4G<br>虚拟内存：进程运行时</p>
+<h1 id="4-10-阿里一面："><a href="#4-10-阿里一面：" class="headerlink" title="4.10 阿里一面："></a>4.10 阿里一面：</h1><h3 id="Spring-底层实现，怎么去做的，怎么去实现的。"><a href="#Spring-底层实现，怎么去做的，怎么去实现的。" class="headerlink" title="Spring 底层实现，怎么去做的，怎么去实现的。"></a>Spring 底层实现，怎么去做的，怎么去实现的。</h3><h3 id="如何学习多线程知识"><a href="#如何学习多线程知识" class="headerlink" title="如何学习多线程知识"></a>如何学习多线程知识</h3><h3 id="要系统的学习Java知识"><a href="#要系统的学习Java知识" class="headerlink" title="要系统的学习Java知识"></a>要系统的学习Java知识</h3><h3 id="基础系统的学习"><a href="#基础系统的学习" class="headerlink" title="基础系统的学习"></a>基础系统的学习</h3><h1 id="4-11作业帮一面"><a href="#4-11作业帮一面" class="headerlink" title="4.11作业帮一面"></a>4.11作业帮一面</h1><h3 id="哈希一致性，高并发，redis应用场景"><a href="#哈希一致性，高并发，redis应用场景" class="headerlink" title="哈希一致性，高并发，redis应用场景"></a>哈希一致性，高并发，redis应用场景</h3><p><img src="https://img-blog.csdnimg.cn/20190420155300140.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1MDY0NjM1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ul>
+<li>redis有序集合实现聊天记录： app缓存清除了之后，没法再看到聊天记录，说明他不会去数据库查找聊天记录，只是查找手机上的缓存。</li>
+<li>哈希结构：商品有好几个可以编辑，每个人是一个小key。</li>
+</ul>
+<h1 id="4-12招银网络一面"><a href="#4-12招银网络一面" class="headerlink" title="4.12招银网络一面"></a>4.12招银网络一面</h1><h3 id="tomcat服务器怎么跟小程序通信"><a href="#tomcat服务器怎么跟小程序通信" class="headerlink" title="tomcat服务器怎么跟小程序通信"></a>tomcat服务器怎么跟小程序通信</h3><h3 id="小程序ajax访问的权限"><a href="#小程序ajax访问的权限" class="headerlink" title="小程序ajax访问的权限"></a>小程序ajax访问的权限</h3><p>小程序特点，数据发生变化，前端页面也会直接发生变化</p>
+<h3 id="小程序访问限制，黑客进入"><a href="#小程序访问限制，黑客进入" class="headerlink" title="小程序访问限制，黑客进入"></a>小程序访问限制，黑客进入</h3><h3 id="两个人同时改到相同代码，如何解决"><a href="#两个人同时改到相同代码，如何解决" class="headerlink" title="两个人同时改到相同代码，如何解决"></a>两个人同时改到相同代码，如何解决</h3><h3 id="数据库的设计有什么感触，范式"><a href="#数据库的设计有什么感触，范式" class="headerlink" title="数据库的设计有什么感触，范式"></a>数据库的设计有什么感触，范式</h3><h3 id="博客里面有图片，文字，如何存储"><a href="#博客里面有图片，文字，如何存储" class="headerlink" title="博客里面有图片，文字，如何存储"></a>博客里面有图片，文字，如何存储</h3><p>长段文字（TEXT  LONGTEXT）</p>
+<ul>
+<li>Mysql数据类型：<br>数值类型:<br><img src="https://img-blog.csdnimg.cn/20190419171335384.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1MDY0NjM1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>日期和时间类型：<br><img src="https://img-blog.csdnimg.cn/20190419171544656.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1MDY0NjM1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>字符串类型：<br><img src="https://img-blog.csdnimg.cn/20190419171741712.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1MDY0NjM1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+</ul>
+<h1 id="4-13作业帮二面"><a href="#4-13作业帮二面" class="headerlink" title="4.13作业帮二面"></a>4.13作业帮二面</h1><h3 id="数据分页问题"><a href="#数据分页问题" class="headerlink" title="数据分页问题"></a>数据分页问题</h3><pre><code>Limit 5; 从第一个数0开始，到4的5个数
+Limit 5，5；从5开始的5个数     代替为  Limit 4 offset 3 从行3开始的4行
+若果要求返回的行数大于剩下的行数，就返回剩下的行数 
+Limit优化方案</code></pre><ul>
+<li><p>后端解决方案：前端传数据包括（当前页数page，以及每页的个数pagesize），后端(page-1)<em>pagesize到page</em>pagesize的数据，同时判断总共数据个数，考虑最后一页的情况。</p>
+<p>  offset(代表需要跳过的个数) = (page-1)*pagesize<br>  skip(offset).limit(pagesize)</p>
+</li>
+</ul>
+<p>具体也有三种方法：<br>（1）通过数组进行分页，第一次把所有的数据都取过来，然后每次对数组取索引范围内的值。<br>（2） sql语句里面实现：select * from student limit #{page}，#{pagesize}</p>
+<h4 id="问题与优化："><a href="#问题与优化：" class="headerlink" title="问题与优化："></a><a href="https://aotu.io/notes/2017/06/27/infinite-scrolling/index.html" target="_blank" rel="noopener">问题与优化</a>：</h4><ol>
+<li><p>数据缺失：第一次取了20-11数据；期间有人删除了第17条数据，此时再去取第二页会导致第10个数据缺失，只会取1-9的数据。</p>
+</li>
+<li><p>数据重复：第一次取20-11，此时又增加了一条数据，变为21条，第二次取就会重复取到第11条数据。</p>
+</li>
+</ol>
+<h4 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h4><ul>
+<li><p>时间分片式缓存<br>使用缓存，（按时间分片式缓存）。<br>前端传的数据增加时间戳（timestamp），请求第一页数据时，timestamp =0 。接下来每次将第一步返回的timestamp输出。<br>后端：对于timestamp为0的话，生成当前时间对应的缓存，并返回前端所需；若timestamp不为0，且缓存不存在，则提示“刷新数据”。若存在，则直接返回。</p>
+</li>
+<li><p>游标式分页<br>客户端记录，分页的最后一个数据ID，请求下一页时候告诉上次请求的ID。<br>优点：避免重复遗漏，不需要计算offset<br>缺点：只适合按照时间追加的方式简单排序。</p>
+</li>
+<li><p>一次性下发ID（适用于id列表不会很大的业务场景）<br>第一次请求把所有的ID以及第一页的数据给前端<br>之后再请求，前端只需要自己去加id，告诉后台需要那些数据</p>
+<ul>
+<li>客户端排除<br>客户端中保存已经加载的id，每次请求玩先去重</li>
+</ul>
+</li>
+</ul>
+<h4 id="无限下拉的方法（用户下滑时更新页面）"><a href="#无限下拉的方法（用户下滑时更新页面）" class="headerlink" title="无限下拉的方法（用户下滑时更新页面）"></a>无限下拉的方法（用户下滑时更新页面）</h4><h1 id="4-17-小米一面"><a href="#4-17-小米一面" class="headerlink" title="4.17 小米一面"></a>4.17 小米一面</h1><h3 id="问道了分页时候，如果有别人操作数据库，导致数据重复或消失"><a href="#问道了分页时候，如果有别人操作数据库，导致数据重复或消失" class="headerlink" title="问道了分页时候，如果有别人操作数据库，导致数据重复或消失"></a>问道了分页时候，如果有别人操作数据库，导致数据重复或消失</h3><p>答案见上面</p>
+<h3 id="sql问题：1-查找表得到年龄大于20的男性、女性数量-2-group-by，查班级年龄，及每个数量的个数，年龄大于5"><a href="#sql问题：1-查找表得到年龄大于20的男性、女性数量-2-group-by，查班级年龄，及每个数量的个数，年龄大于5" class="headerlink" title="sql问题：1.查找表得到年龄大于20的男性、女性数量 2. group by，查班级年龄，及每个数量的个数，年龄大于5"></a>sql问题：1.查找表得到年龄大于20的男性、女性数量 2. group by，查班级年龄，及每个数量的个数，年龄大于5</h3><h3 id="stringBuffer-、-Stringbuilder-、string-区别"><a href="#stringBuffer-、-Stringbuilder-、string-区别" class="headerlink" title="stringBuffer 、 Stringbuilder 、string 区别"></a>stringBuffer 、 Stringbuilder 、string 区别</h3><h3 id="分布式锁，redis-如何实现"><a href="#分布式锁，redis-如何实现" class="headerlink" title="分布式锁，redis 如何实现"></a>分布式锁，redis 如何实现</h3><h3 id="SprngBoot了解吗"><a href="#SprngBoot了解吗" class="headerlink" title="SprngBoot了解吗"></a>SprngBoot了解吗</h3><h3 id="大数相加和大数相减，大数相乘"><a href="#大数相加和大数相减，大数相乘" class="headerlink" title="大数相加和大数相减，大数相乘"></a>大数相加和大数相减，大数相乘</h3><p>  大数相乘思路：第i位*第j位 等于 新的数组的第i+j位的数，先对两个数进行遍历，</p>
+<pre><code>for (int i = 0; i &lt; a.length; i++) {
+            for (int j = 0; j &lt; b.length; j++) {
+                result[i + j] += (int) (a[i] - &#39;0&#39;) * (int) (b[j] - &#39;0&#39;);
+            }
+        }</code></pre><p>最后对res的每一位判断，大于10的话，要进位。进位的要进给前边的。</p>
+<h1 id="4-17-阿里二面"><a href="#4-17-阿里二面" class="headerlink" title="4.17 阿里二面"></a>4.17 阿里二面</h1><h3 id="小程序登陆接口设置（Session），如何加密（MD5）"><a href="#小程序登陆接口设置（Session），如何加密（MD5）" class="headerlink" title="小程序登陆接口设置（Session），如何加密（MD5）"></a>小程序登陆接口设置（Session），如何加密（MD5）</h3><ul>
+<li><p>MD5加密算法</p>
+<p>  对称加密算法：DES算法，3DES算法，TDEA算法，Blowfish算法，RC5算法，IDEA算法，AES算法。<br>  非对称加密算法：RSA、Elgamal、背包算法、Rabin、D-H、ECC。<br>  经典的哈希算法：MD2、MD4、MD5 和 SHA-1（目的是将任意长输入通过算法变为固定长输出，且保证输入变化一点输出都不同，且不能反向解密）</p>
+</li>
+</ul>
+<p>MD5不可逆，生成信息摘要后，不能通过解析获得原来的内容</p>
+<h3 id="CopyOnWrite"><a href="#CopyOnWrite" class="headerlink" title="CopyOnWrite"></a>CopyOnWrite</h3><ul>
+<li>内部通过 volatile数组+ReentrantLock锁 实现</li>
+<li>读写分离的同步机制，读不加锁，写先复制到另一个数组，再复制数组中添加，然后复制数组替代原数组</li>
+<li>应用场景：读多写少，（商品类目、黑名单）通过</li>
+</ul>
+<h3 id="hashtable-和-ConcurrentHahsMap"><a href="#hashtable-和-ConcurrentHahsMap" class="headerlink" title="hashtable 和 ConcurrentHahsMap"></a><a href="http://antsnote.club/2018/05/31/Java-ConcurrentHashMap/" target="_blank" rel="noopener">hashtable 和 ConcurrentHahsMap</a></h3><p>currentHashmap：<br>1.volatile 对Node类的属性，保证可见性<br>2.如果没有hash冲突那么通过CAS机制去添加，如果有的话，再去通过synchronized 更小粒度的锁代码块</p>
+<p>size操作</p>
+<h1 id="4-24-OPPO（看看海量数据面试题）"><a href="#4-24-OPPO（看看海量数据面试题）" class="headerlink" title="4.24 OPPO（看看海量数据面试题）"></a>4.24 OPPO（看看<a href="https://blog.csdn.net/v_july_v/article/details/7382693" target="_blank" rel="noopener">海量数据面试题</a>）</h1><h3 id="海量数据查找"><a href="#海量数据查找" class="headerlink" title="海量数据查找"></a>海量数据查找</h3><ul>
+<li>布隆过滤器（hash set）</li>
+</ul>
+<p>m位的位数组，k个哈希函数，把temp求k个哈希，同时将结果中的位置值为1<br>缺点：误算率；不可删除，删除的也许另一个值也是1</p>
+<ul>
+<li>倒排索引查找</li>
+</ul>
+<h3 id="海量数据TOPk"><a href="#海量数据TOPk" class="headerlink" title="海量数据TOPk"></a>海量数据TOPk</h3><p>分治+Trie树/hash+小顶堆：<br>先按哈希方法分成多个小数据集</p>
+<p>建立最小堆，如果大于最小的，就替代最小的，同时保持最小堆</p>
+<h3 id="位图法（适用于数据比较密集的-："><a href="#位图法（适用于数据比较密集的-：" class="headerlink" title="位图法（适用于数据比较密集的)："></a>位图法（适用于数据比较密集的)：</h3><ul>
+<li>方法：通过一个数组int bit[N]，可以存储N * 32个数据，最大的数N * 32-1；数组大小是最大值-最小值<br>把每个数据存在一个位上面，方法是数temp，存储在bit[temp/32] 其中第temp%32位设为1。</li>
+</ul>
+<pre><code>
+#define BITSPERWORD 32 
+#define SHIFT 5 
+#define MASK 0x1F 
+#define N 10000000 
+
+
+void set(int i) { //将指定的bit赋1
+    a[i&gt;&gt;SHIFT] |= (1&lt;&lt;(i &amp; MASK)); 
+} //将i右移动，就是除32，然后求32的余数
+
+void clr(int i) { //将指定的bit清0
+    a[i&gt;&gt;SHIFT] &amp;= ~(1&lt;&lt;(i &amp; MASK)); 
+} 
+
+int test(int i){//取一下存入的值  每5 bit是一组。
+    return a[i&gt;&gt;SHIFT] &amp; (1&lt;&lt;(i &amp; MASK)); 
+} 
+</code></pre><ul>
+<li><p>应用：</p>
+<p>  海量数据排序：大量数据1000,000,000中的900,000,000个不重复的正整数排序，<br>  1000000000/(8* 1024*1024)=119.2MB空间<br>  先找到最大值，最小值。然后位图法的范围就是最大值减最小值。对于每个数的存储就是该数减去最小值。</p>
+</li>
+</ul>
+<pre><code>海量数据去重：在2.5亿个整数中找出不重复的整数，00表示没有出现，01表示出现一次，10表示出现多次，232∗2=1 GB(这里没有限定整数的范围，所有把所有32位整数都考虑进去)</code></pre><p>应用1：某文件中包含一些8位的电话号码，统计出现的号码的个数？（判断有谁出现）<br>8为最大是99 999 999，大约是99M的bit，12.5MB的内存，就可以统计出来出现的号码。</p>
+<p>应用2：某文件中包含一些8位的电话号码，统计只出现一次的号码？（判断有谁出现并且指出现1次）<br>  需要扩展一下，可以用两个bit表示一个号码，0代表没有出现过，1代表只出现过1次，2代表至少出现2次。 </p>
+<p>应用3：有两个文件，文件1中有1亿个10位的qq号码，文件2中有5千万个10位qq号码，判断两个文件中重复出现的qq号。<br>首先建立10的10次方个大小的位数组（占用内存大约是1.25G），全部初始化为0，读取第一个文件，对应的qq号存放到对应的未知，数值改为1，如果重复出现仍是1.读取完毕第一个文件后，读取第二个文件，对应的位置为1则表示重复出现。</p>
+<p> 应用4：有两个文件，文件1中有1亿个15位的qq号码，文件2中有5千万个15位的qq号码，判断两个文件中重复出现的qq号。<br>应用4中，qq号码上升为15位的时候，显然内存是不够用了，这个时候怎么办？使用<strong>Bloom Filter（布隆过滤器）</strong></p>
+<p>可读性差<br>位图存储的元素个数虽然比一般做法多，但是存储的元素大小受限于存储空间的大小。位图存储性质：存储的元素个数等于元素的最大值。比如， 1K 字节内存，能存储 8K 个值大小上限为 8K 的元素。（元素值上限为 8K ，这个局限性很大！）比如，要存储值为 65535 的数，就必须要 65535/8=8K 字节的内存。要就导致了位图法根本不适合存 unsigned int 类型的数（大约需要 2^32/8=5 亿字节的内存）。<br>位图对有符号类型数据的存储，需要 2 位来表示一个有符号元素。这会让位图能存储的元素个数，元素值大小上限减半。 比如 8K 字节内存空间存储 short 类型数据只能存 8K*4=32K 个，元素值大小范围为 -32K~32K 。</p>
+<h3 id="Trie树（字典树）"><a href="#Trie树（字典树）" class="headerlink" title="Trie树（字典树）"></a>Trie树（字典树）</h3>
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="https://zqfang666.github.io" class="b-link-green">DayByDay</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2019/05/24/暑期实习面经（19年3月 至 19年4月）/" class="b-link-green">暑期实习面经（19年3月至19年4月）</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/07/08/(java编程思想Ⅰ)2019.6.28 一至七/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="Java编程思想(上)">
+                        
+                        <span class="card-title">Java编程思想(上)</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">抽象类 接口抽象类 接口区别1，抽象类里可以有构造方法，而接口内不能有构造方法。2，抽象类中可以有普通成员变量，而接口中不能有普通成员变量。3，抽象类中可以包含非抽象的普通方法，而接口中所有的方法必须是抽象的，不能有非抽象的普通方法。4，抽</div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-08
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/学习/" class="post-category" target="_blank">
+                                    学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java基础/" target="_blank">
+                        <span class="chip bg-color">Java基础</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/03/11/剑指offer NO.1（2018.12.25——2018.1.25）/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="剑指offer(上)">
+                        
+                        <span class="card-title">剑指offer(上)</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">     public static void main(String[] args) {
+            Scanner in = new Scanner(System.in);
+            while (in.has</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-03-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Coding/" class="post-category" target="_blank">
+                                    Coding
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+    </div>
+    <div class="col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="https://blinkfox.github.io/" target="_blank">Blinkfox</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">30.1k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/zqfang666" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:zqfang321@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=847368807" class="tooltipped" data-tooltip="QQ联系我: 847368807" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input" autofocus="">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

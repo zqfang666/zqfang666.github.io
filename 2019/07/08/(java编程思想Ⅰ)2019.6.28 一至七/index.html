@@ -1,0 +1,1119 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Java编程思想(上), DayByDay">
+    <meta name="description" content="抽象类 接口抽象类 接口区别1，抽象类里可以有构造方法，而接口内不能有构造方法。2，抽象类中可以有普通成员变量，而接口中不能有普通成员变量。3，抽象类中可以包含非抽象的普通方法，而接口中所有的方法必须是抽象的，不能有非抽象的普通方法。4，抽">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Java编程思想(上) | DayByDay</title>
+    <link rel="icon" type="image/jpeg" href="/favicon.jpg">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+</head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo.jpg" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">DayByDay</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.jpg" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">DayByDay</div>
+        <div class="logo-desc">
+            
+            Java成长之路
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+    </ul>
+
+    <div class="social-link">
+    <a href="https://github.com/zqfang666" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:zqfang321@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=847368807" class="tooltipped" data-tooltip="QQ联系我: 847368807" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        Java编程思想(上)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+</style>
+<div class="row">
+    <div class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Java基础/" target="_blank">
+                                <span class="chip bg-color">Java基础</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/学习/" class="post-category" target="_blank">
+                                学习
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-07-08
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        4.6k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        22 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>抽象类 接口<br>抽象类 接口区别<br>1，抽象类里可以有构造方法，而接口内不能有构造方法。<br>2，抽象类中可以有普通成员变量，而接口中不能有普通成员变量。<br>3，抽象类中可以包含非抽象的普通方法，而接口中所有的方法必须是抽象的，不能有<br>非抽象的普通方法。<br>4，抽象类中的抽象方法的访问类型可以是public ，protected和默认类型，但接口中的抽<br>象方法只能是public类型的，并且默认即为public abstract类型。<br>5，抽象类中可以包含静态方法，接口内不能包含静态方法。<br>6，抽象类和接口中都可以包含静态成员变量，抽象类中的静态成员变量的访问类型可<br>以任意，但接口中定义的变量只能是public static类型，并且默认为public static类型。<br>7，一个类可以实现多个接口，但只能继承一个抽象类。</p>
+<h2 id="Think-in-Java"><a href="#Think-in-Java" class="headerlink" title="Think in Java"></a>Think in Java</h2><h3 id="第二章-一切都是对象"><a href="#第二章-一切都是对象" class="headerlink" title="第二章 一切都是对象"></a>第二章 一切都是对象</h3><p>2.2 基本类型<br>| 类型| 位数+范围 |<br>|–|–|<br>| boolean(Boolean) |  |<br>|char(Character)  | 16bits       0<del>2^16-1(65535)<br>|byte(Byte)   | 8bits          -128</del>127 |<br>| short(Short)  |16bits        -2^ 15(32768) ~ 2^15-1 |<br>|int(Integer)  | 32bits        -2^31(2147483648 =2*10 ^9) ~ 2 ^31-1 |<br>|long(Long) | 64bits        -2^63(9,223,372,036,854,775,808)~ 2 ^63-1           |<br>|float(Float)    | 32bits |<br>| double(Double)  |   64bits |<br>| void |  |</p>
+<h3 id="第三章操作符"><a href="#第三章操作符" class="headerlink" title="第三章操作符"></a>第三章操作符</h3><p>3.8 逻辑操作符（p46）</p>
+<ul>
+<li>短路：一旦能明确无误的确定整个表达式的值，就不再计算其余部分</li>
+</ul>
+<pre><code> teat1(0) &amp;&amp;  teat1(0) &amp;&amp; teat1(0)</code></pre><p>3.9 直接常量（47）：<br>后缀字符标志类型：（大小）L代表long；（大小写）F代表float；D代表double。0x代表十六进制，0代表8进制，二进制通过Integer.toBinaryString()、Long.toBinaryString()</p>
+<pre><code>        long i = 0x12;
+       long j = 012;
+
+       System.out.println(&quot;i=&quot;+i+&quot;二进制&quot;+Long.toBinaryString(i));
+       System.out.println(&quot;j=&quot;+j+&quot;二进制&quot;+Long.toBinaryString(j));</code></pre><ul>
+<li>指数计数法</li>
+</ul>
+<pre><code>        float a =  1e-43f;
+        float fmax = Float.MAX_VALUE;
+        float fmin = Float.MIN_VALUE;
+        double dmax = Double.MAX_VALUE;
+        double dmin = Double.MIN_VALUE;
+        System.out.println(fmax);
+        System.out.println(fmin);
+        System.out.println(dmax);
+        System.out.println(dmin);</code></pre><p>3.10 按为操作符(49)<br>&amp;(按位与)   可与=连用<br>|(按位或)      可与=连用<br>^(按位异或)   可与=连用<br>~(按位非，一元操作符，)   不可与=连用<br>布尔类型也作为单比特值对待</p>
+<pre><code>
+        int a = 0xAAAA;
+        int b = 0x5555;
+        System.out.println(a&amp;b);
+        System.out.println(Integer.toBinaryString(a&amp;b));
+        System.out.println(a|b);
+        System.out.println(Integer.toBinaryString(a|b));
+        System.out.println(a^b);
+        System.out.println(Integer.toBinaryString(a^b));</code></pre><p>3.11 移位操作符(49)<br>&lt;&lt;(左移) 后面补0<br>.&gt;&gt;(有符号右移) 符号+，高位插入0；符号-，高位插入1<br>.&gt;&gt;&gt;(无符号右移)高位插入0</p>
+<ul>
+<li><p>对char、byte、short类型移位，会先转换为int型，得到的结果也是int类型<br>（在对byte，short移位时，先转换为int进行移位，然后再截赋值给原来的值）<br>（负数的二进制是补码，原码：负数绝对值的二进制，并令最高位为1；反码：除最高位其他取反 补码：反码+1）</p>
+<pre><code>int a = -1;
+      System.out.println(Integer.toBinaryString(a).length());
+      a&gt;&gt;&gt;=10;
+      System.out.println(Integer.toBinaryString(a).length());
+
+      long b =-1;
+      System.out.println(Long.toBinaryString(b).length());
+      b&gt;&gt;&gt;=10;
+      System.out.println(Long.toBinaryString(b).length());
+
+      short c =-1;
+      System.out.println(Integer.toBinaryString(c).length());
+      c&gt;&gt;&gt;=10;
+      System.out.println(Integer.toBinaryString(c).length());
+
+      byte d = -1;
+      System.out.println(Integer.toBinaryString(c).length());
+      System.out.println(Integer.toBinaryString(c&gt;&gt;&gt;10).length());
+</code></pre></li>
+</ul>
+<pre><code>
+习题12：所有位都是1
+</code></pre><p>int a = -1;<br>        a &lt;&lt;=10;<br>        System.out.println(Integer.toBinaryString(a));<br>        for(int i=0;i&lt;32;i++){<br>            a&gt;&gt;&gt;=1;<br>            System.out.println(Integer.toBinaryString(a));<br>        }</p>
+<pre><code></code></pre><p>char c = ‘a’;<br>        System.out.println(Integer.toBinaryString(c));<br>        c+=1;<br>        System.out.println(Integer.toBinaryString(c));<br>        c = ‘b’;<br>        System.out.println(Integer.toBinaryString(c));</p>
+<pre><code>3.12 三元操作符
+
+boolean-exp? value0 : value1
+
+3.13 字符串操作符+、+=
+
+变为字符型</code></pre><p>int x=0,y=1,z=2;<br>        String s = “x,y,z”;<br>        System.out.println(s+x+y+z);<br>        s += “sssss”;<br>        System.out.println(s+(x+y+z));<br>        System.out.println(“ “+x);<br>        //int====String<br>        String a = “”+x;<br>        String b = Integer.toString(x);</p>
+<pre><code>3.15 类型转换操作符
+</code></pre><p>int a =1;<br>        long b=123131231;<br>        a = (int)b;<br>        b = (long)a;</p>
+<pre><code>
+3.16 截尾和舍入
+对于float和double，转换为int型，回直接截尾，输出整数部分；想要舍入的话，需要round方法
+</code></pre><p>float a = 1.734f;<br>        System.out.println((int)a);<br>        System.out.println(Math.round(a));</p>
+<pre><code>
+## 第四章 控制执行流程
+- 4.1 if-else
+- 4.3 迭代
+while(){}
+do{}while()
+for()
+求素数
+</code></pre><p>static void sushu(){<br>        for(int i=1;i&lt;100;i++){<br>            for(int j=1;j&lt;Math.sqrt(i);j++){<br>                if(i%j==0 &amp;&amp; j!=1){<br>                    break;<br>                }else if(j+1&gt;Math.sqrt(i)){<br>                    System.out.println(i);<br>                }<br>            }<br>        }<br>    }</p>
+<pre><code>- Foreach语法</code></pre><p>int [] a = {1,2,3,45,6};<br>        for(int x :a){<br>            System.out.println(x);<br>        }</p>
+<pre><code>- return:1.指定方法返回什么值；2.导致当前方法的退出
+</code></pre><p>static int test(int testval,int begin,int end){<br>        if (end &lt; begin) {<br>            System.out.println(“error”);<br>            return 0;<br>        }<br>        if(testval&gt;=begin &amp;&amp; testval&lt;=end){<br>            return 1;<br>        }else{<br>            return -1;<br>        }<br>    }</p>
+<pre><code>- 4.6 break和continue
+break：直接跳出整个循环；continue：跳出本次循环，进行下一次
+带标签的（因为有循环嵌套存在，想从多层嵌套中break或continue）
+continue label：中断所有的迭代，直接转到label的地方，然后继续程序
+break label：中断所有的迭代，直接转到label的地方，不再进入迭代
+</code></pre><p>int i=0;<br>        outer:<br>        while(true){<br>            System.out.println(“Outer loop”);<br>            while(true){<br>                i++;<br>                System.out.println(“i=”+i);<br>                if(i==3){<br>                    System.out.println(“continue”);<br>                    continue ;<br>                }<br>                if(i==5){<br>                    System.out.println(“continue outer”);<br>                    continue outer;<br>                }<br>                if(i==7){<br>                    System.out.println(“break”);<br>                    break ;<br>                }<br>                if(i==9){<br>                    System.out.println(“break outer”);<br>                    break outer;<br>                }</p>
+<pre><code>        }
+    }</code></pre><pre><code>- fibbo</code></pre><p>static void fibbo(int n){<br>        int a=1,b=1,temp;<br>        if(n==1){<br>            System.out.println(a);<br>            return;<br>        }<br>        if(n==2){<br>            System.out.println(a);<br>            System.out.println(b);<br>            return;<br>        }<br>        System.out.println(a);<br>        System.out.println(b);<br>        for(int i=2;i&lt;n;i++){</p>
+<pre><code>        temp = a+b;
+        a = b;
+        b = temp;
+        System.out.println(b);
+    }
+}</code></pre><pre><code>- 吸血鬼数字，位数偶数；1260=21*60
+思路1：简单暴力方法</code></pre><p>static void bloodNum(){<br>        int a,b,c,d;<br>        for(int i=1001;i&lt;9999;i++){<br>            a = i/1000;<br>            b = (i/100)%10;<br>            c = (i/10)%10;<br>            d = (i%10);<br>            test(i,a,b,c,d);<br>            test(i,a,b,d,c);<br>            test(i,b,a,c,d);<br>            test(i,b,a,d,c);<br>            test(i,a,c,b,d);<br>            test(i,a,c,d,b);<br>            test(i,c,a,b,d);<br>            test(i,c,a,d,b);<br>            test(i,a,d,c,b);<br>            test(i,a,d,b,c);<br>            test(i,d,a,c,b);<br>            test(i,d,a,b,c);<br>        }<br>    }<br>    static void test(int i,int m,int n,int x,int y){<br>        if(i == (m<em>10+n)</em>(x<em>10+y)){<br>            System.out.println(i+”=”+(m*10+n)+”</em>“+(x*10+y));<br>        }<br>    }</p>
+<pre><code>思路2：反过来计算，找符合的两位数
+</code></pre><p>static void bloodNum(){<br>        for(int i=10;i&lt;100;i++){<br>            for(int j=i;j&lt;100;j++){<br>                int target = i*j;<br>                if(target&lt;1000||target&gt;9999){<br>                    continue;<br>                }<br>                int [] tar = {target/1000,target/100%10,target/10% 10,target%10};<br>                int [] get = {i/10,i%10,j/10,j%10};<br>                Arrays.sort(tar);<br>                Arrays.sort(get);<br>                if(Arrays.equals(tar,get)){<br>                    System.out.println(target);<br>                }</p>
+<pre><code>        }
+    }
+}</code></pre><pre><code>## 第五章、初始化与清理
+- 5.1 用构造器确保初始化
+构造器采用与类相同的名字，初始化期间自动调用构造器。
+无参构造器(默认构造器)：不接受任何参数
+
+
+- 5.2 方法重载
+相同名字的方法，参数不一样，每个都是独一无二的参数类型列表，(顺序不同也会区分)
+**基本类型的重载**：如果实际参数类型&lt;小于方法中声明的形参类型，实际会被提升；char型略有不同，会被直接提升至int型。如果实际参数类型&gt;方法中声明的形参类型，需要自己进行窄化转换。
+
+- 5.3默认构造器
+如果没有定义构造器，对象会自动生成一个无参构造器，并调用。
+</code></pre><p>Dog d = new Dog();<br>        byte a=0;<br>        short b=0;<br>        d.bark();<br>        d.bark(‘c’);<br>        d.bark(a);<br>        d.bark(b);<br>        d.bark(1);<br>        d.bark(1.0f);<br>        d.bark(1.0);</p>
+<p>class Dog{</p>
+<pre><code>void bark(){System.out.println(&quot;voidbark&quot;);}
+void bark(char c){System.out.println(&quot;char&quot;);}
+void bark(byte c){System.out.println(&quot;byte&quot;);}
+void bark(short c){System.out.println(&quot;short&quot;);}
+void bark(int c){System.out.println(&quot;int&quot;);}
+void bark(long c){System.out.println(&quot;long&quot;);}
+void bark(float c){System.out.println(&quot;float&quot;);}
+void bark(double c){System.out.println(&quot;double&quot;);}</code></pre><p>}</p>
+<pre><code>- 5.4 this关键字
+对于同一个类的两个对象，如何知道是那个调用了方法：</code></pre><p>//编译器内部解决<br>Dog.function(引用,参数)</p>
+<pre><code>this：只能在方法内部使用，表示对“**调用方法的那个对象**”的引用
+</code></pre><p>class Apple{<br>    void a(){<br>        System.out.println(“functiona”);<br>    }<br>    void b(){<br>        System.out.println(“this-a”);<br>        this.a();<br>        a();<br>    }<br>}</p>
+<pre><code>构造器中调用构造器
+</code></pre><p>class flower{<br>    int count=0;<br>    String s = “initial”;</p>
+<pre><code>flower(int p){
+    count = p;
+    System.out.println(&quot;coun=&quot;+count);
+}
+flower(String ss){
+    System.out.println(&quot;string=&quot;+s);
+    s=ss;
+}
+flower(String s,int p){
+    this(p);
+    //this(s);  构造器只能调用一次
+    this.s = s;
+    System.out.println(&quot;String+int&quot;);
+}
+flower(){
+    this(&quot;hi&quot;,7);
+}
+void pringfun(){
+   // this(11);  其他方法不能调用构造器
+    System.out.println(&quot;function pppppppp&quot;);
+}</code></pre><p>}</p>
+<pre><code>- static 含义：没有this的方法。可以不建立对象，通过类调用方法，static方法内不能用非静态方法。
+
+- 5.5 终结处理和垃圾回收
+finalize:
+对象可能不被垃圾回收
+垃圾回收不等于“析构”
+</code></pre><p>Book a = new Book(true);<br>        a.checkIn();<br>        new Book(true).checkIn();<br>        System.gc();</p>
+<p>class Book{<br>    boolean check = false;<br>    Book(boolean x){<br>        check = x;<br>    }<br>    void checkIn(){<br>        check = false;<br>    }</p>
+<pre><code>@Override
+protected void finalize() throws Throwable {
+    if(check){
+        System.out.println(&quot;error:checkout&quot;);
+    }
+}</code></pre><p>}</p>
+<pre><code>Java GC：
+GC Root(虚拟机中引用对象+方法区中的类静态属性+方法区中常量的引用对象+本地方法栈中引用对象)
+从堆栈和静态存储区出发，遍历所有的引用，进而找出所有存活对象
+- 算法
+1、 停止赋值（stop and copy）（垃圾多的话效率高）——适合新生代GC
+2、 标记清扫（mark and sweep）（对于少量垃圾效率高，但是会产生过多碎片）
+3、 标记整理（Mark-compact）
+
+新生代(Young)：eden+survivor1+survivor2=8:1:1——Minor GC(复制算法)
+老年代(Old)：存放经过多次Minor GC存活下来的对象——Full GC(标记)
+OOM(out of memory)：当GC+非GC时间&gt;GCTimeRatio 限制引发
+
+- 5.6成员初始化(Java中所有变量使用前都尽量初始化)
+方法中的局部变量如果没有初始化会报错；而类的数据成员会自动给初始值。
+
+
+- 5.7构造器初始化
+变量先初始化，初始化先静态对象，后非静态，静态对象只初始化一次，非静态对象每次都会调用。
+对象创建过程：查找类路径定位.class文件；载入文件进行初始化，只在对象首次加载时进行；new XX() 在堆上为对象分配空间；存储空间清零，所有对象自动成为默认值；执行初始化动作；执行构造器。
+
+初始化的顺序</code></pre><p>public class Chapter5 {<br>    public static void main(String[] args){<br>    System.out.println(“inside main”);<br>//        Cups.cup1.f(99);<br>    }<br>    static Cups cups1 = new Cups();<br>    static Cups cups2 = new Cups();<br>}</p>
+<p>class Cup{<br>    Cup(int x){<br>        System.out.println(“Cup(“+x+”)cup”);<br>    }<br>    void f(int x){<br>        System.out.println(“f(“+x+”)”);<br>    }<br>}</p>
+<p>class Cups{<br>    static Cup cup1;<br>    static Cup cup2;</p>
+<pre><code>static {
+    cup1 = new Cup(1);
+    cup2 = new Cup(2);
+}
+Cups(){
+    System.out.println(&quot;cups()&quot;);
+}</code></pre><p>}</p>
+<pre><code>
+- 5.8 数组初始化
+数组相等，只是针对引用的复制。
+</code></pre><pre><code>    int [] a1;
+    int a[];</code></pre><pre><code>可变参数列表：
+</code></pre><p>static void printArray(Object… args){<br>        for(Object x :args)<br>            System.out.println(x);</p>
+<pre><code>}</code></pre><p>static void pring(Object [] args){<br>        for(Object x :args)<br>            System.out.print(x+” “);<br>        System.out.println();<br>    }</p>
+<pre><code>static void F(int require,String... orgs){
+    for(String s:orgs){
+        System.out.print(s);
+    }
+    System.out.println();
+}</code></pre><p>printArray(47,3.14f,11.11);<br>        printArray(new Integer(34),new Float(3.13),new Double(11.11));<br>        printArray(“one “,”two”,”three”);<br>        printArray(new Chapter5(),new Chapter5());<br>        pring(new Object[]{47,3.14f,11.11});</p>
+<pre><code>    F(3,&quot;a&quot;,&quot;b&quot;,&quot;c&quot;);</code></pre><pre><code>重载的话，所有版本上都有可变参数列表，或者就不用
+</code></pre><p>A(1,’b’,’a’);<br>        A(‘a’,’b’);//报错</p>
+<p>static void A(float a,Character…args){<br>        System.out.println(“first”);<br>    }</p>
+<pre><code>static void A(Character...args){
+    System.out.println(&quot;second&quot;);
+}</code></pre><pre><code>
+- 5.9 枚举类型
+</code></pre><p>   Chapter5 a = new Chapter5(Money.E);<br>        Chapter5 b = new Chapter5(Money.Q);<br>        a.sw();<br>        b.sw();</p>
+<pre><code>}
+Money degree;
+Chapter5(Money x){
+    this.degree = x;
+}
+
+public void sw(){
+    System.out.println(&quot;switch&quot;);
+    switch (degree){
+        case Q:System.out.println(&quot;Its q&quot;);break;
+        case W:System.out.println(&quot;Its w&quot;);break;
+        case E:System.out.println(&quot;Its e&quot;);break;
+        case R:System.out.println(&quot;Its r&quot;);break;
+        case T:System.out.println(&quot;Its t&quot;);break;
+    }
+}
+
+public enum Sp{
+    A,B,C,D
+}
+
+public enum Money{
+    Q,W,E,R,T,Y
+}</code></pre><pre><code>## 第六章、访问权限控制
+public_protected_(default)_private 权限由大至小
+
+包内含有一组类，每个类只能含有一个public类
+
+&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;&lt;/th&gt;
+            &lt;th&gt;类内部&lt;/th&gt;
+            &lt;th&gt;同一package&lt;/th&gt;
+            &lt;th&gt;子类&lt;/th&gt;
+            &lt;th&gt;任何地方&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;private&lt;/td&gt;
+            &lt;td&gt;可以&lt;/td&gt;
+            &lt;td&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;default&lt;/td&gt;
+            &lt;td&gt;可以&lt;/td&gt;
+            &lt;td&gt;可以&lt;/td&gt;
+            &lt;td&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;protected&lt;/td&gt;
+            &lt;td&gt;可以&lt;/td&gt;
+            &lt;td&gt;可以&lt;/td&gt;
+            &lt;td&gt;可以&lt;/td&gt;
+            &lt;td&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;public&lt;/td&gt;
+            &lt;td&gt;可以&lt;/td&gt;
+            &lt;td&gt;可以&lt;/td&gt;
+            &lt;td&gt;可以&lt;/td&gt;
+            &lt;td&gt;可以&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+
+
+
+## 第七章、复用类（分文组合和继承的方法）
+- 1.组合（在新的类中产生现有类的对象）
+</code></pre><p>public class Chapter7 {<br>    private Ano e;<br>    private String a,b;</p>
+<pre><code>Chapter7(){
+    a = &quot;AAAAA&quot;;
+    b = &quot;BBBBB&quot;;
+}
+
+@Override
+public String toString() {
+    if(e == null){
+        e = new Ano();
+    }
+    return &quot;A=&quot;+a+
+            &quot;B=&quot;+b+
+            &quot;e=&quot;+e;
+}
+
+public static void main(String[] args){
+    Chapter7 x = new Chapter7();
+    System.out.println(x);
+}</code></pre><p>}<br>class Ano {<br>    private String s;<br>    Ano(){<br>        System.out.println(“Ano construct”);<br>        s = “IIIIIII”;<br>    }</p>
+<pre><code>@Override
+public String toString() {
+    return s;
+}</code></pre><p>}</p>
+<pre><code>
+- 2.继承（按照现有类的类型来创建新类） 
+每个类都可以有自己的main方法。</code></pre><p>class Cleaner{<br>    private String s = “cleaner”;<br>    public void append(String a){s+=a;}<br>    public void dilute(){append(“dilute”);}<br>    public void scrum(){append(“scrum”);}<br>    public void apply(){append(“apply”);}</p>
+<pre><code>@Override
+public String toString() {
+    return s;
+}
+
+public static void main(String[] args){
+    Cleaner x = new Cleaner();
+    x.apply();x.dilute();x.scrum();
+    System.out.println(x);
+}</code></pre><p>}</p>
+<p>public class Chapter7 extends Cleaner{<br>@Override<br>    public void apply() {<br>        append(“new apply”);<br>        super.apply();</p>
+<pre><code>}
+public void foam(){
+    append(&quot;foam&quot;);
+}
+
+
+public static void main(String[] args){
+    Chapter7 x = new Chapter7();
+    x.apply();
+    x.dilute();
+    x.foam();
+    System.out.println(x);
+
+    Cleaner.main(args);
+}</code></pre><p>  }</p>
+<pre><code>基类构造器总是会被调用，在导出类构造器调用前被调用。。
+另外对于带参数的构造器，子类需要手动调用父类的构造器，因为自己写了带参数的构造器，就不会生成默认的不带参构造器。
+
+- 3.代理
+属于组合与继承之间的方法，直接在类中新建一个成员对象，然后调用成员对象的方法。
+
+- 4.结合使用组合和继承
+
+名称的重载</code></pre><p>class Chongzai{<br>    char fun(char c){<br>        System.out.println(“Char fun”);<br>        return c;<br>    }<br>    int fun(int c){<br>        System.out.println(“Int fun”);<br>        return c;<br>    }<br>    float fun(float c){<br>        System.out.println(“Float fun”);<br>        return c;<br>    }</p>
+<p>}<br>class A extends Chongzai{<br>    String fun(String x){<br>        System.out.println(“string a”);</p>
+<pre><code>    return  x;
+}
+public static void main(String[] args){
+    A x = new A();
+    System.out.println(x.fun(&#39;a&#39;));
+    System.out.println(x.fun(&quot;abc&quot;));
+
+}</code></pre><p>}</p>
+<pre><code>- 5、两者之间的关系
+组合是显示地做，适用于想在新类中使用现有类的功能，而非他的接口。即在新类中嵌入某个对象让其实现功能。然后再对于新类定义一些接口。
+
+- 6、protected 关键字（类的继承者可以访问，同一包内可以访问，对于其他的还是private） 
+
+- 7 向上转型
+</code></pre><p>class Amp{<br>    public void play(){System.out.println(“play asd”);}<br>    static void ht(Amp x){<br>        x.play();<br>    }<br>    void eat(){System.out.println(“Amp eat”);}<br>}</p>
+<p>class Ampa extends Amp{</p>
+<pre><code>public static void main(String[] args){
+    Ampa x = new Ampa();</code></pre><p>//        Amp.ht(x);<br>        Amp y = new Amp();<br>        x.play();<br>        x.grow(x);<br>        y.grow(x);//不能向下转型</p>
+<pre><code>}
+static void grow(Amp x){
+    System.out.println(&quot;Ampa grow&quot;);
+    x.eat();
+}
+
+@Override
+public void play() {
+    System.out.println(&quot;new play&quot;);
+}</code></pre><p>}</p>
+<pre><code>####  8.Final关键字
+1. **final数据** （final   以及  static final 的区别）
+**如果修饰引用对象，引用对象的属性可以改变，而修饰基本类型才是不可改变**
+**static 说明只有一份，对于同一个类的不同对象，只会有这一个，final static 命名格式VAL_5**
+**final说明值是不可改变的，但是不同对象还是会生成不同的final值**
+</code></pre><p>class FinalData{<br>    private static Random rand = new Random(47);<br>    private String id;<br>    public FinalData(String s){this.id = s;}<br>    //对于static final变量命名需要大写</p>
+<pre><code>private final int valueOne = 9;
+private static final int VALUE_TWO = 99;
+public static final int VALUE_THREE = 39;
+
+private final int i4 = rand.nextInt(20);
+static final int INT_5 = rand.nextInt(10);
+
+private Value v1 = new Value(22);
+private final Value v2 = new Value(11);
+private static final Value VAL_3 = new Value(33);
+
+//数组
+private final int[] a = {1,2,3,4,5};
+
+@Override
+public String toString() {
+    return id+&quot;:&quot;+&quot;i4=&quot;+i4+&quot;,INT_5=&quot;+INT_5;
+}
+
+public static void main(String[] args){
+    FinalData x = new FinalData(&quot;x&quot;);
+
+    x.a[0]++;
+    x.v2.i++;  //可以对引用类型的内部改变
+    x.v1 = new Value(9);</code></pre><p>//        x.VAL_3 = new Value(9); //final 类型<br>//        x.v2 = new Value(8);  //v2是final类型<br>//        x.a = new int[3]; //数组的引用是不可以改变的</p>
+<pre><code>    //对于变量随机赋值，不同的对象非静态的值不一样，但是静态的值只初始化一次，不会再改变了
+    System.out.println(x);
+    FinalData y = new FinalData(&quot;y&quot;);
+    System.out.println(x);
+    System.out.println(y);
+
+}</code></pre><p>}</p>
+<p>class Value{<br>    int i;<br>    public Value(int i){<br>        this.i = i;<br>    }<br>}</p>
+<pre><code>**空白final**：必须在构造器处初始化
+</code></pre><p>class Pop{<br>    private  int i;<br>    Pop(int i){<br>        this.i = i;<br>    }<br>}<br>class BlankFinal{<br>    private final int a;<br>    private final Pop p;</p>
+<pre><code>public BlankFinal(){
+    a=1;
+    p = new Pop(1);
+}
+public BlankFinal(int x){
+    a=x;
+    p = new Pop(x);
+}
+
+public static void main(String[] args){
+    new BlankFinal();
+
+}</code></pre><p>}</p>
+<pre><code>**final参数**：在方法内不可改变
+
+2. **final方法**: 把方法锁定，继承类就不可以修改了，等于private方法
+3. **final类**：不希望可以被继承，不需要改变。不过类中的变量可变，方法都相当于加了final
+
+- 初始化及类的加载：
+1.找到x.main()，找到x的编译代码(x.class文件下)，注意到他还有个基类，对基类进行加载，不管是否调用对象这些都要加载。
+2.基类中的static初始化，然后是导出类的static
+3.最后是构造器进行。
+</code></pre><p>class A{</p>
+<pre><code>static int j =printInt(&quot;A.Initialized&quot;);
+static int printInt(String s){
+    System.out.println(s);
+    return 12;
+}
+A(){System.out.println(&quot;A construct&quot;);}</code></pre><p>}<br>class B extends A{<br>    static int k = printInt(“B.initialized”);<br>    B(){System.out.println(“B Construct”);}<br>}<br>class C{<br>    static int j =printInt(“C.Initialized”);</p>
+<pre><code>C(){System.out.println(&quot;c construct&quot;);}
+static A a =new A();
+static int printInt(String s){
+    System.out.println(s);
+    return 12;
+}</code></pre><p>}</p>
+<p>class H extends B{<br>    H(){System.out.println(“H construct”);}<br>    static int i = printInt(“H initialized”);<br>    public static void main(String[] args){</p>
+<pre><code>    System.out.println(&quot;start&quot;);
+
+    H x = new H();
+    System.out.println(C.a);
+
+}</code></pre><p>}</p>
+<p>///////////////////////////////////////////////////////////////输出<br>A.Initialized<br>B.initialized<br>H initialized            所有的基类都会进行初始化<br>start<br>A construct<br>B Construct<br>H construct              新建对象，基类对象构造器先调用<br>C.Initialized<br>A construct<br>ThinkinJava.A@4554617c</p>
+<pre><code></code></pre>
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="https://zqfang666.github.io" class="b-link-green">DayByDay</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2019/07/08/(java编程思想Ⅰ)2019.6.28 一至七/" class="b-link-green">Java编程思想(上)</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2019/07/08/(java编程思想Ⅰ)2019.6.28 一至七/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="Java编程思想(上)">
+                        
+                        <span class="card-title">Java编程思想(上)</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">抽象类 接口抽象类 接口区别1，抽象类里可以有构造方法，而接口内不能有构造方法。2，抽象类中可以有普通成员变量，而接口中不能有普通成员变量。3，抽象类中可以包含非抽象的普通方法，而接口中所有的方法必须是抽象的，不能有非抽象的普通方法。4，抽</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-08
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/学习/" class="post-category" target="_blank">
+                                    学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java基础/" target="_blank">
+                        <span class="chip bg-color">Java基础</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/05/24/暑期实习面经（19年3月 至 19年4月）/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="暑期实习面经（19年3月至19年4月）">
+                        
+                        <span class="card-title">暑期实习面经（19年3月至19年4月）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">2019.4.1 蘑菇街+东方财富项目中是否用到多线程秒杀系统内部如何实现redis与mysql的同步对于分布式的了解：讲讲Java中的长短连接（可以实现以下）
+长连接、短链接（Socket实现）  http长短连接适合的 长：客户端服务端</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-05-24
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/面试/" class="post-category" target="_blank">
+                                    面试
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+    </div>
+    <div class="col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="https://blinkfox.github.io/" target="_blank">Blinkfox</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">30.1k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/zqfang666" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:zqfang321@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=847368807" class="tooltipped" data-tooltip="QQ联系我: 847368807" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input" autofocus="">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

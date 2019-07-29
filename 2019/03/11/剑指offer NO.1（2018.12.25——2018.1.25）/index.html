@@ -1,0 +1,1951 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="剑指offer(上), DayByDay">
+    <meta name="description" content="     public static void main(String[] args) {
+            Scanner in = new Scanner(System.in);
+            while (in.has">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>剑指offer(上) | DayByDay</title>
+    <link rel="icon" type="image/jpeg" href="/favicon.jpg">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+</head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo.jpg" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">DayByDay</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.jpg" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">DayByDay</div>
+        <div class="logo-desc">
+            
+            Java成长之路
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+    </ul>
+
+    <div class="social-link">
+    <a href="https://github.com/zqfang666" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:zqfang321@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=847368807" class="tooltipped" data-tooltip="QQ联系我: 847368807" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        剑指offer(上)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+</style>
+<div class="row">
+    <div class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Coding/" class="post-category" target="_blank">
+                                Coding
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-03-11
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        7.7k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        36 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <pre><code class="java">     public static void main(String[] args) {
+            Scanner in = new Scanner(System.in);
+            while (in.hasNextInt()) {//注意while处理多个case
+                int a = in.nextInt();
+                int b = in.nextInt();
+                System.out.println(a + b);
+            }
+        }</code></pre>
+<h3 id="1-二维数组中的查找"><a href="#1-二维数组中的查找" class="headerlink" title="1. 二维数组中的查找"></a>1. 二维数组中的查找</h3><ul>
+<li><p>题意：二维数组从左至右递增，从上至下递增，给一个数判断是否在里面</p>
+</li>
+<li><p>思路：找到数组的规律，从左下角开始找最好，如果目标比他大，向右移动；如果比他小，向左移动。</p>
+</li>
+</ul>
+<pre><code class="java">public class Solution {
+    public boolean Find(int target, int [][] array) {
+        int a = array.length;
+        int b = array[0].length; 
+        for(int i = a-1,j= 0;i&gt;=0&amp;&amp;j&lt;b;){
+            if(array[i][j]&gt;target ){
+                i--;
+            }
+            else if(array[i][j]&lt;target){
+                j++;
+            }
+            else{
+                return true;
+            }            
+         }
+        return false;
+    }
+}</code></pre>
+<h3 id="2-替换空格："><a href="#2-替换空格：" class="headerlink" title="2. 替换空格："></a>2. 替换空格：</h3><ul>
+<li>题目：将一个字符串的所有空格转变成“20%”</li>
+<li>思路：stringbuffer     先计算有几个空格，然后从后往前进行改变，这样就只需要一次了。</li>
+</ul>
+<pre><code class="java">public static String replaceSpace(StringBuffer str) {
+        int l = str.length();
+        int space = 0;
+        for(int i = 0;i&lt;l;i++) {
+            if(str.charAt(i)==&#39; &#39;) {
+                space++;
+            }
+        }
+        space = 2*space;
+        str.setLength(l+space);       
+        for(int i = l-1,j = l-1+space;i&gt;=0;) {            
+            if(str.charAt(i)!=&#39; &#39;) {
+                str.setCharAt(j, str.charAt(i));
+                i--;
+                j--;
+            }
+            else {
+                str.setCharAt(j,&#39;0&#39;);  
+                j--;
+                str.setCharAt(j,&#39;2&#39;);    
+                j--;
+                str.setCharAt(j,&#39;%&#39;);
+                j--;
+                i--;                
+            }
+
+        }
+        String res = str.toString();            
+        return res;
+    }</code></pre>
+<h3 id="3-从尾到头打印链表"><a href="#3-从尾到头打印链表" class="headerlink" title="3. 从尾到头打印链表"></a>3. 从尾到头打印链表</h3><ul>
+<li><p>输入一个链表，从尾到头输出</p>
+</li>
+<li><p>思路1：将数据放入堆栈，，最后pop出来，即可实现</p>
+<pre><code class="java">import java.util.Stack;
+import java.util.ArrayList;
+public class Solution {
+  public ArrayList&lt;Integer&gt; printListFromTailToHead(ListNode listNode) {
+     ArrayList&lt;Integer&gt; res = new ArrayList&lt;Integer&gt;();
+      Stack&lt;Integer&gt; s = new Stack&lt;Integer&gt;();
+      while(listNode != null) {
+          s.push(listNode.val);
+          listNode = listNode.next;
+      }
+
+      while(!s.isEmpty()) {
+          res.add(s.pop());
+      }
+      return res;
+  }
+}</code></pre>
+</li>
+<li><p>思路2：递归的方法（第二遍再写）MARK</p>
+</li>
+</ul>
+<h3 id="4-用两个栈实现队列"><a href="#4-用两个栈实现队列" class="headerlink" title="4. 用两个栈实现队列"></a>4. 用两个栈实现队列</h3><ul>
+<li>题意：队列先进先出，栈先进后出</li>
+<li>思路：进入的时候向A栈放，出去的时候A放到B里面，从B出栈</li>
+</ul>
+<pre><code class="java">public class Solution {
+    Stack&lt;Integer&gt; stack1 = new Stack&lt;Integer&gt;();
+    Stack&lt;Integer&gt; stack2 = new Stack&lt;Integer&gt;();
+
+    public void push(int node) {
+        stack1.push(node);
+    }
+
+    public int pop() {
+        if(stack2.isEmpty()){
+            while(!stack1.isEmpty()){
+                stack2.push(stack1.pop());
+            }
+        }
+        return stack2.pop();
+    }
+}</code></pre>
+<h3 id="5-旋转数组的最小数字"><a href="#5-旋转数组的最小数字" class="headerlink" title="5. 旋转数组的最小数字"></a>5. 旋转数组的最小数字</h3><ul>
+<li><p>思路:  理解  非减排序 == 递增排序；     得到一个递增排序旋转，然后去找最小值，二分法。</p>
+</li>
+<li><p>如果没有重复值的话：mid值大于等于start，则最小值在第二部分；否则最小值在第一部分。最后end就为最小值</p>
+</li>
+<li><p>如果有重复值的话，如101111111，111111101<br>此时需要判断min等于第一个值和最后一个值——只能顺序查找</p>
+<pre><code class="java">  public static int minNumberInRotateArray(int [] array) {
+
+      int len = array.length;
+      if (len == 0) {
+          return 0;
+      }
+      else {              
+          int[] res = new int[2];
+          res = binary(0,len-1,array);
+          while(res[1] - res[0] !=1 &amp;&amp; res[0] != -1){              
+              res = binary(res[0],res[1],array);     
+          }
+          if(res[0] == -1){
+              int min = array[0];
+              for(int i = 0;i&lt;len;i++) {
+                  if(min&gt;array[i]) {
+                      min = array[i];
+                  }
+              }
+              return min;
+          }
+          else{
+              return array[res[1]]&lt;array[res[0]]?array[res[1]]:array[res[1]];
+          }
+
+          }
+      }    
+  public static int[] binary(int start, int end,int [] a){    
+          int[] res1 = new int[2]; 
+          int mid = (start+end)/2;
+          if(a[mid] == a[start] &amp;&amp; a[mid] == a[end]) {
+              res1[0] = -1;
+              res1[1] = -1;
+              return res1;                
+
+          }else if(a[mid]&gt;=a[start]){
+              res1[0] = mid;
+              res1[1] = end;        
+              return res1;
+          }
+          else{    
+              res1[0] = start;
+              res1[1] = mid;        
+              return res1;
+          }
+      }</code></pre>
+</li>
+</ul>
+<h3 id="6-斐波那契数列"><a href="#6-斐波那契数列" class="headerlink" title="6. 斐波那契数列"></a>6. 斐波那契数列</h3><ul>
+<li>思路：就很简单。。。。；补充给一个值找到他是第几项</li>
+</ul>
+<pre><code class="java">public static int Fibonacci(int n) {
+        int a = 0,b = 1,c;
+        if(n == 0) {
+            return 0;
+        }else {
+            for(int i =0;i&lt;n-1;i++) {
+                c = a+b;
+                a = b;
+                b = c;
+            }
+            return b;
+        }
+</code></pre>
+<h3 id="6-斐波那契变形！！"><a href="#6-斐波那契变形！！" class="headerlink" title="6. 斐波那契变形！！"></a>6. 斐波那契变形！！</h3><blockquote>
+<p>Fibonacci数列是这样定义的： F[0] = 0 F[1] = 1 for each i ≥ 2: F[i] = F[i-1] +<br>F[i-2] 因此，Fibonacci数列就形如：0, 1, 1, 2, 3, 5, 8, 13,<br>…，在Fibonacci数列中的数我们称为Fibonacci数。给你一个N，你想让其变为一个Fibonacci数，每一步你可以把当前数字X变为X-1或者X+1，现在给你一个数N求最少需要多少步可以变为Fibonacci数。</p>
+</blockquote>
+<blockquote>
+<p>输入描述: 输入为一个正整数N(1 ≤ N ≤ 1,000,000)</p>
+</blockquote>
+<blockquote>
+<p>输出描述: 输出一个最小的步数变为Fibonacci数”</p>
+</blockquote>
+<pre><code class="java">import java.util.Scanner;
+public class Main{
+
+    public static void main(String[] args) {
+    Scanner i = new Scanner(System.in);
+    System.out.println(FibI(i.nextInt()));
+}
+
+
+    public static int FibI(int n) {
+        int a = 0,b = 1,c;
+        while(true) {
+            if(n&gt;=a &amp;&amp; n&lt;=b) {
+                break;
+            }        
+            c = a+b;
+            a = b;
+            b = c;
+
+        }
+        return n-a&gt;b-n?b-n:n-a;
+
+    }
+
+
+}</code></pre>
+<h3 id="6-跳台阶"><a href="#6-跳台阶" class="headerlink" title="6. 跳台阶"></a>6. 跳台阶</h3><blockquote>
+<p>题目描述 一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法（先后次序不同算不同的结果）。</p>
+</blockquote>
+<ul>
+<li>思路：通过列举发现，n = 1，一种；n = 2，两种。只有1步和2步，则跳到n的话，只可能n-1位置跳1步过去；n-2位置跳2步过去</li>
+</ul>
+<pre><code class="java">    public static int JumpFloor(int target) {
+        if(target&lt;=2) {
+            return target;
+        }
+        return JumpFloor(target-2) +JumpFloor(target-1);
+</code></pre>
+<h3 id="6-变态跳台阶："><a href="#6-变态跳台阶：" class="headerlink" title="6. 变态跳台阶："></a>6. 变态跳台阶：</h3><blockquote>
+<p>题目描述 一只青蛙一次可以跳上1级台阶，也可以跳上2级……它也可以跳上n级。求该青蛙跳上一个n级的台阶总共有多少种跳法。</p>
+</blockquote>
+<ul>
+<li>思路此时n的大小等于，f(n-1)+……f(1)+1，基础部分就是f(1)= 1，递归即可—</li>
+</ul>
+<pre><code class="java">public static int JumpFloorII(int target) {
+        if(target&lt;=2) {
+            return target;
+        }
+        int res = 0;
+        while(target&gt;1) {
+            res += JumpFloorII(target-1);
+            target --;
+        }
+        return res+1;
+
+    }</code></pre>
+<h3 id="7-矩形覆盖"><a href="#7-矩形覆盖" class="headerlink" title="7. 矩形覆盖"></a>7. 矩形覆盖</h3><blockquote>
+<p>我们可以用2<em>1的小矩形横着或者竖着去覆盖更大的矩形。请问用n个2</em>1的小矩形无重叠地覆盖一个2*n的大矩形，总共有多少种方法？</p>
+</blockquote>
+<pre><code class="java">public class Solution {
+    public int RectCover(int target) {
+        if(target&lt;=2){
+            return target;
+        }
+        return RectCover(target-1)+RectCover(target-2);
+    }
+}</code></pre>
+<h3 id="8-二进制中1的个数"><a href="#8-二进制中1的个数" class="headerlink" title="8. 二进制中1的个数"></a>8. 二进制中1的个数</h3><blockquote>
+<p>输入一个整数，输出该数二进制表示中1的个数。其中负数用补码表示。</p>
+</blockquote>
+<ul>
+<li>思路：计算机里面二进制存储各个数字，负数用补码；所以就是通过位运算，得到数字中的1的个数。int32位，通过一个数（0x 80000000）来循环右移得到二进制表示。</li>
+</ul>
+<pre><code class="java">public int NumberOf1(int n) {
+        int count = 0;
+        for (int i = 0; i &lt; 32; i++)
+        {
+            int t = (n &amp; 0x80000000 &gt;&gt;&gt; i) &gt;&gt;&gt; (31 - i);
+            if(t == 1){
+                count++;
+            }
+        }
+        return count;
+    }</code></pre>
+<ul>
+<li>巧妙方法</li>
+</ul>
+<pre><code class="java">public int NumberOf1(int n) {
+        int count = 0;
+        while(n!= 0){
+            count++;
+            n = n &amp; (n - 1);
+         }
+        return count;
+    }</code></pre>
+<blockquote>
+<p>举个例子：一个二进制数1100，从右边数起第三位是处于最右边的一个1。减去1后，第三位变成0，它后面的两位0变成了1，而前面的1保持不变，因此得到的结果是1011.我们发现减1的结果是把最右边的一个1开始的所有位都取反了。这个时候如果我们再把原来的整数和减去1之后的结果做与运算，从原来整数最右边一个1那一位开始所有位都会变成0。如1100&amp;1011=1000.也就是说，把一个整数减去1，再和原整数做与运算，会把该整数最右边一个1变成0.那么一个整数的二进制有多少个1，就可以进行多少次这样的操作。</p>
+</blockquote>
+<h3 id="9-数值的整数次方"><a href="#9-数值的整数次方" class="headerlink" title="9. 数值的整数次方"></a>9. 数值的整数次方</h3><blockquote>
+<p>给定一个double类型的浮点数base和int类型的整数exponent。求base的exponent次方。</p>
+</blockquote>
+<ul>
+<li><pre><code class="java">public double Power(double base, int exponent) {
+      double res=1.0;
+      if(exponent&gt;=0){
+          for(int i=0;i&lt;exponent;i++){
+          res =res*base;
+      }           
+      }
+      else{
+          base = 1.0/base;
+          for(int i=0;i&lt;-exponent;i++){
+              res =res*base;
+          }
+      }
+      return res;
+}</code></pre>
+<h3 id="10-调整数组顺序使奇数位于偶数前面"><a href="#10-调整数组顺序使奇数位于偶数前面" class="headerlink" title="10. 调整数组顺序使奇数位于偶数前面"></a>10. 调整数组顺序使奇数位于偶数前面</h3></li>
+</ul>
+<blockquote>
+<p>输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。</p>
+</blockquote>
+<ul>
+<li>思路1：空间复杂度O(n)，空间换时间</li>
+</ul>
+<pre><code class="java">public static void reOrderArray(int [] array) {
+        int len = array.length,j=0;
+        int[] res = new int[len];
+        res = array.clone();    
+        for(int i=0;i&lt;len;i++) {
+
+            if(res[i]%2!=0) {
+                array[j] = res[i];
+                j++;
+
+            }        
+        }
+        for(int i=0;i&lt;len;i++) {
+            if(res[i]%2==0) {
+                array[j] = res[i];
+                j++;
+            }
+        }
+
+    }</code></pre>
+<ul>
+<li>思路2：O(n2)， 从后往前，n次遍历。每次判断相邻的，前奇数后偶数；这样可以实现奇数都在最前面，并且是按顺序的。</li>
+</ul>
+<pre><code class="java">
+ for (int i = 0; i &lt; array.size();i++)
+        {
+            for (int j = array.size() - 1; j&gt;i;j--)
+            {
+                if (array[j] % 2 == 1 &amp;&amp; array[j - 1]%2 == 0) //前偶后奇交换
+                {
+                    swap(array[j], array[j-1]);
+                }
+            }
+        }
+    }</code></pre>
+<h3 id="11-链表倒数第k个结点"><a href="#11-链表倒数第k个结点" class="headerlink" title="11. 链表倒数第k个结点"></a>11. 链表倒数第k个结点</h3><blockquote>
+<p>题目描述 输入一个链表，输出该链表中倒数第k个结点。</p>
+</blockquote>
+<ul>
+<li><p>思路1：遍历两次，一次计算总共长度，第二次再遍历到倒数第k个结点</p>
+<pre><code class="java">public ListNode FindKthToTail(ListNode head,int k) {
+
+      ListNode r = head;
+      int l = 1;
+      if(head == null | k&lt;0){
+          return null;
+      }
+      while(r.next != null){
+          r = r.next;
+          l++;
+      }
+      if(l&lt;k)
+          return null;
+      for(int i =0;i&lt;=l-k-1;i++){
+          head = head.next;
+      }
+      return head;
+
+  }</code></pre>
+</li>
+<li><p>思路2：遍历一遍，用两个指针即可</p>
+</li>
+</ul>
+<pre><code class="java">public ListNode FindKthToTail(ListNode head,int k) {
+
+        ListNode a = head;
+        ListNode b = head;
+        if(head == null|k&lt;0){
+            return null;
+        }
+        int i = 0;
+        while(a!=null &amp; i&lt;k){
+            i++;
+            a = a.next;
+        }
+        if(i!=k){
+            return null;
+        }
+        while(a!=null){
+            b = b.next;
+            a = a.next;
+        }
+        return b;
+
+
+    }</code></pre>
+<h3 id="12-反转链表"><a href="#12-反转链表" class="headerlink" title="12. 反转链表"></a>12. 反转链表</h3><blockquote>
+<p>输入一个链表，反转链表后，输出新链表的表头。</p>
+<ul>
+<li>思路1：很笨的方法，将链表反转，头结点就是最后一个，先得到最后一个结点，然后再倒着将所有的结点val值加入。O(n2)<pre><code class="java">public ListNode ReverseList(ListNode head) {
+      if(head == null||head.next == null){
+          return head;
+      }
+      ListNode a = head;
+      int l = 1;
+      while(a.next!= null){
+          a = a.next;
+          l++;
+      }
+      ListNode res = a;
+      for(int i=l-2;i&gt;=0;i--){
+          ListNode b = head;
+          for(int j=0;j&lt;i;j++){
+              b = b.next;
+          }
+          ListNode C = new ListNode(b.val);
+          a.next = C;
+          a = a.next;
+      }
+      return res;
+  }</code></pre>
+</li>
+<li>思路2：简单方法！！！只进行一遍遍历，记录当前结点的前一个、后一个。<br>先记录当前结点的后一个，然后将结点的后一个赋值为前一个；<br>再将当前结点变为后一个，前一个结点变为当前结点</li>
+</ul>
+</blockquote>
+<pre><code class="java">public ListNode ReverseList(ListNode head) {
+        ListNode pre = null;
+        ListNode behind ;
+        if(head == null||head.next == null){
+            return head;
+        }
+        while(head!=null){
+            behind = head.next;
+            head.next = pre;
+
+            pre = head;
+            head = behind;
+        }
+        return pre;
+    }</code></pre>
+<h3 id="13-合并两个排序的链表"><a href="#13-合并两个排序的链表" class="headerlink" title="13. 合并两个排序的链表"></a>13. 合并两个排序的链表</h3><blockquote>
+<p>输入两个单调递增的链表，输出两个链表合成后的链表，当然我们需要合成后的链表满足单调不减规则。</p>
+</blockquote>
+<ul>
+<li>思路1：简单法（非递归法），两个链表进行一次遍历，小的值先放进新链表中，直到两个链表值都取了</li>
+</ul>
+<pre><code class="java">public static ListNode Merge(ListNode list1,ListNode list2) {
+        ListNode res = new ListNode(0);
+        ListNode a = new ListNode(0);
+        a.next = res;
+        while(list1 !=null || list2 !=null){
+            if(list1 ==null &amp;&amp; list2 !=null){
+                res.next = list2;
+                list2 = null;
+            }else if(list1 !=null &amp;&amp; list2 ==null){
+                res.next = list1;
+                list1 = null;
+            }else{
+                if(list1.val&lt;list2.val){
+                    ListNode C = new ListNode(list1.val);
+                    res.next = C;
+                    res = res.next;
+                    list1 = list1.next;
+                }else{
+                    ListNode C = new ListNode(list2.val);
+                    res.next = C;
+                    res = res.next;
+                    list2 = list2.next;
+                }
+
+            }
+
+        }
+        return res.next.next;
+
+    }</code></pre>
+<ul>
+<li>思路2：递归法，重复调用！！！！！！！！！！！！！</li>
+</ul>
+<pre><code class="java">public ListNode Merge(ListNode list1,ListNode list2) {
+        if(list1 ==null ){
+            return list2;
+        }
+        if(list2 ==null){
+            return list1;
+        }
+
+            if(list1.val&lt;list2.val){
+                list1.next = Merge(list1.next,list2);
+                return list1;
+            }else{
+                list2.next = Merge(list1,list2.next);
+                return list2;
+                }
+    }</code></pre>
+<h3 id="14-顺时针打印矩阵"><a href="#14-顺时针打印矩阵" class="headerlink" title="14.顺时针打印矩阵"></a>14.顺时针打印矩阵</h3><ul>
+<li>思路1：ZZ做法，复杂极其</li>
+</ul>
+<pre><code class="java">public ArrayList&lt;Integer&gt; printMatrix(int [][] matrix) {
+        int a = matrix.length;
+        int b = matrix[0].length;
+        ArrayList res = new ArrayList();
+        int start = 0,end = a-1;
+        int flag = 0;
+        if(a == 1){
+            for(int j=0;j&lt;b;j++){
+                res.add(matrix[0][j]);
+            }
+            return res;
+        }
+        if(b == 1){
+            for(int i=0;i&lt;a;i++){
+                res.add(matrix[i][0]);
+            }
+            return res;
+        }
+        while(start!=end){
+
+            if(end-start==1){
+                for(int j =flag;j&lt;=b-1-flag;j++){
+                    res.add(matrix[start][j]);
+                }
+                for(int j =b-1-flag;j&gt;=flag;j--){
+                    res.add(matrix[end][j]);
+                }
+                return res;
+            }
+            for(int j =flag;j&lt;=b-1-flag;j++){
+                res.add(matrix[start][j]);
+            }
+            for(int i=start+1;i&lt;end;i++){
+                res.add(matrix[i][b-1-flag]);
+            }
+
+            for(int j =b-1-flag;j&gt;=flag;j--){
+                res.add(matrix[end][j]);
+            }
+
+            for(int i=end-1;i&gt;start;i--){
+                res.add(matrix[i][flag]);
+            }
+            if(end-start==2){
+                for(int j=flag+1;j&lt;b-1-flag;j++){
+                    res.add(matrix[end-1][j]);
+                }
+                return res;
+            }
+            if(b-1-flag ==flag+1){
+                return res;
+            }
+            if(b-1-flag ==flag+2){
+                for(int i =start+1;i&lt;=end-1;i++){
+                    res.add(matrix[i][flag+1]);
+                }
+                return res;
+            }
+            start++;
+            end--;
+            flag++;
+        }
+        return res;
+
+    }</code></pre>
+<h3 id="15-包含min函数的栈："><a href="#15-包含min函数的栈：" class="headerlink" title="15.包含min函数的栈："></a>15.包含min函数的栈：</h3><blockquote>
+<p>题目描述 定义栈的数据结构，请在该类型中实现一个能够得到栈中所含最小元素的min函数（时间复杂度应为O（1））。</p>
+</blockquote>
+<p>-思路：任务完成栈的数据结构同时要加一个min函数，完成出栈、入栈、获取栈顶元素。<br>规定了时间复杂度，肯定要牺牲空间。加入min辅助栈，出栈的时候两个都出；入栈的时候，min栈需要比较大小；最小值总是在min的top</p>
+<pre><code class="java">static Stack&lt;Integer&gt; data = new Stack&lt;Integer&gt;();
+    static Stack&lt;Integer&gt; min = new Stack&lt;Integer&gt;();
+
+    public static void push(int node) {
+        data.push(node);
+        if(min.isEmpty() || node&lt;min.peek()){
+            min.push(node);
+        }else{
+            min.push(min.peek());
+        }
+    }
+
+    public static void pop() {
+        min.pop();
+        data.pop();
+    }
+
+    public static int top() {
+        return data.peek();
+    }
+
+    public static int min() {
+        return min.peek();
+    }</code></pre>
+<h3 id="16、栈的压入、弹出序列"><a href="#16、栈的压入、弹出序列" class="headerlink" title="16、栈的压入、弹出序列"></a>16、栈的压入、弹出序列</h3><blockquote>
+<p>输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否可能为该栈的弹出顺序。假设压入栈的所有数字均不相等。例如序列1,2,3,4,5是某栈的压入顺序，序列4,5,3,2,1是该压栈序列对应的一个弹出序列，但4,3,5,1,2就不可能是该压栈序列的弹出序列。（注意：这两个序列的长度是相等的）</p>
+</blockquote>
+<ul>
+<li><p>麻烦思路：新建一个堆栈，模拟入栈的情况，根据出栈的判断是否正确，逻辑上比较繁琐。1、判断是否相等且是否还能入栈‘’‘’‘’‘’‘</p>
+<pre><code class="java">public boolean IsPopOrder(int [] pushA,int [] popA) {
+      int len = pushA.length;
+      Stack&lt;Integer&gt; data = new Stack&lt;Integer&gt;();
+      int i=0,j=0;
+      while(j&lt;len){
+
+          if (i&lt;len &amp;&amp; pushA[i] == popA[j]) {
+              i++;
+              j++;
+          }else if (data.isEmpty()){//入栈不等于出栈
+              data.push(pushA[i]);
+              i++;
+          }else if(data.peek() == popA[j]){
+                  data.pop();
+                  j++;
+          }else if(i &gt;= len-1){
+              return false;
+          }else{ 
+              data.push(pushA[i]);
+              i++;
+          }
+
+      }
+      return true;
+
+  }</code></pre>
+</li>
+<li><p>简单思路：没有必要对push进行验证，直接放进辅助栈即可，没放进去，都要进行循环比较辅助栈与pop的关系，这样清楚明了</p>
+</li>
+</ul>
+<pre><code class="java">public static boolean IsPopOrder1(int [] pushA,int [] popA){
+        int len = pushA.length;
+        Stack&lt;Integer&gt; data = new Stack&lt;Integer&gt;();
+        for(int i=0,j=0;i&lt;len;i++){
+            data.push(pushA[i]);
+            while(!data.isEmpty() &amp;&amp; data.peek() == popA[j]){
+                data.pop();
+                j++;
+            }
+        }
+        return data.isEmpty();
+    }</code></pre>
+<h3 id="17、复杂链表的复制"><a href="#17、复杂链表的复制" class="headerlink" title="17、复杂链表的复制"></a>17、复杂链表的复制</h3><blockquote>
+<p>输入一个复杂链表（每个节点中有节点值，以及两个指针，一个指向下一个节点，另一个特殊指针指向任意一个节点），返回结果为复制后复杂链表的head。（注意，输出结果中请不要返回参数中的节点引用，否则判题程序会直接返回空）</p>
+</blockquote>
+<ul>
+<li>思路：由于题目说不可以直接引用参数中的结点，所以不能直接遍历赋值；</li>
+<li>分三步：1、将原有链表，每个节点后面加上相同元素，同时next值也复制；2、遍历复制后的，将random值也进行复制；3、遍历取出复制的部分</li>
+</ul>
+<pre><code class="java">public RandomListNode Clone(RandomListNode pHead)
+    {
+        if(pHead == null){
+            return null;
+        }
+        RandomListNode res = pHead;
+        while(res != null){
+            RandomListNode clone = new RandomListNode(res.label);
+            clone.next = res.next;
+            res.next = clone;
+            res = res.next.next;
+
+        }
+        res = pHead;
+        while(res!=null){
+            res.next.random = res.random == null? null:res.random.next;
+            res = res.next.next;
+        }
+        res = pHead;
+        RandomListNode c = pHead.next;
+        //就是把遍历每个，同时将他的next变为next.next
+        while(res.next != null){
+
+            RandomListNode cloneNode = res.next;
+            res.next = res.next.next;
+            res = cloneNode;
+
+        }
+        return c;
+    }</code></pre>
+<h3 id="18、重建二叉树-2019-2-24"><a href="#18、重建二叉树-2019-2-24" class="headerlink" title="18、重建二叉树(2019.2.24)"></a>18、重建二叉树(2019.2.24)</h3><blockquote>
+<p>输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回。</p>
+</blockquote>
+<ul>
+<li>思路：根据先序找到根节点，在中序中可知道左子树，右子树范围；再递归查找左子树的右子树的。</li>
+</ul>
+<pre><code class="java">public class Solution {
+    public TreeNode reConstructBinaryTree(int [] pre,int [] in) {
+        return sort(pre,in,0,0,pre.length);
+    }
+    private static TreeNode sort(int[] pre,int[] in,int i,int j,int count){
+           if(count&gt;0){
+               int a=0;
+               for(;a&lt;count;a++){
+                   if(pre[i] == in[a+j])
+                       break;
+               }
+               TreeNode root = new TreeNode(pre[i]);
+               root.left = sort(pre,in,i+1,j,a);
+               root.right = sort(pre,in,i+a+1,j+a+1,count-a-1);
+               return root;
+           }
+            return null;
+        }
+
+}</code></pre>
+<h3 id="19、树的子结构（类以与二叉查找树的后序遍历）"><a href="#19、树的子结构（类以与二叉查找树的后序遍历）" class="headerlink" title="19、树的子结构（类以与二叉查找树的后序遍历）"></a>19、树的子结构（类以与二叉查找树的后序遍历）</h3><blockquote>
+<p>输入两棵二叉树A，B，判断B是不是A的子结构。（ps：我们约定空树不是任意一个树的子结构）</p>
+</blockquote>
+<ul>
+<li>思路：首先题意，如何判断是否为子结构，那么就对A遍历，找到值等于B的根节点（函数1），递归比较左右子树。</li>
+<li>找到相等的，再去递归找B的left和right（函数2) ，其中对于空结点的判断是核心。</li>
+</ul>
+<pre><code class="java">public boolean HasSubtree(TreeNode root1,TreeNode root2) {
+        boolean result = false;
+        if(root1 != null &amp;&amp;root2 != null){
+            if(root1.val == root2.val){
+                result = isSubtree(root1,root2);
+            }
+            if(!result){
+                result = HasSubtree(root1.left,root2);
+            }
+            if(!result){
+                result = HasSubtree(root1.right,root2);
+            }
+        }
+        return result;
+    }
+
+    public boolean isSubtree(TreeNode root1,TreeNode root2){
+        if(root2 == null){
+            return true;
+        }
+        if(root1 == null){
+            return false;
+        }
+        if(root1.val!=root2.val){
+            return false;
+        }
+        return isSubtree(root1.left,root2.left) &amp;&amp; isSubtree(root1.right,root2.right);
+
+    }</code></pre>
+<h3 id="20、二叉树的镜像"><a href="#20、二叉树的镜像" class="headerlink" title="20、二叉树的镜像"></a>20、二叉树的镜像</h3><blockquote>
+<p>操作给定的二叉树，将其变换为源二叉树的镜像。</p>
+</blockquote>
+<ul>
+<li>思路：递归。就是一直遍历从根节点开始将每个结点左右交换，遍历完就是镜像。不需要找到根节点之后再遍历。</li>
+</ul>
+<pre><code class="java"> public static void Mirror(TreeNode root) {
+        TreeNode temp = null;
+        if(root!=null){
+            temp = root.left;
+            root.left = root.right;
+            root.right = temp;
+            if(root.left != null)
+                Mirror(root.left);
+            if(root.right !=null)
+                Mirror(root.right);
+        }
+    }</code></pre>
+<h3 id="21、从上往下打印二叉树"><a href="#21、从上往下打印二叉树" class="headerlink" title="21、从上往下打印二叉树"></a>21、从上往下打印二叉树</h3><blockquote>
+<p>从上往下打印出二叉树的每个节点，同层节点从左至右打印。</p>
+<ul>
+<li>思路：层次遍历，也是BFS，借助递归不好实现，转变思路，借用队列分容易实现。</li>
+</ul>
+</blockquote>
+<pre><code class="java">public ArrayList&lt;Integer&gt; PrintFromTopToBottom(TreeNode root) {
+        ArrayList&lt;Integer&gt; res = new ArrayList&lt;Integer&gt;();
+        ArrayList&lt;TreeNode&gt; queue = new ArrayList&lt;TreeNode&gt;();
+        if(root == null){
+            return res;
+        }
+        queue.add(root);
+        while(!queue.isEmpty()){
+            TreeNode temp = queue.remove(0);
+            if(temp.left!=null)
+                queue.add(temp.left);
+            if(temp.right!=null)
+                queue.add(temp.right);
+            res.add(temp.val);
+
+        }
+        return res;
+    }</code></pre>
+<h3 id="22、二叉搜索树的后序遍历序列"><a href="#22、二叉搜索树的后序遍历序列" class="headerlink" title="22、二叉搜索树的后序遍历序列"></a>22、二叉搜索树的后序遍历序列</h3><blockquote>
+<p>输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。如果是则输出Yes,否则输出No。假设输入的数组的任意两个数字都互不相同。</p>
+</blockquote>
+<ul>
+<li>思路：通过举例发现规律，根节点既末尾应该是前面值的分界线，可以通过这个判断，递归进行</li>
+</ul>
+<p>❌错误仅仅考虑了根节点与左右子树关系，没有考虑左右子树是否是二叉查找树</p>
+<pre><code class="java">public boolean VerifySquenceOfBST(int [] sequence) {
+        int len = sequence.length;
+        if(len&lt;1){
+            return true;
+        }
+        int G = sequence[len-1],i=0;
+        for(;i&lt;len-1;i++){
+            if(sequence[i]&gt;G){
+                break;
+            }
+        }
+        int j =i;
+        for(;j&lt;len-1;j++){
+            if(sequence[j]&lt;G){
+                break;
+            }
+        }
+        if(j == len-1){
+            return true;
+        }else{
+            return false;
+        }
+    }</code></pre>
+<p>正确✔（使用递归）</p>
+<pre><code class="java">public boolean VerifySquenceOfBST(int [] sequence) {
+        int len = sequence.length;
+        if(len&lt;1){
+            return false;
+        }
+        return BST(sequence,0,len-1);
+    }
+    public boolean BST(int [] sequence,int x,int y){
+        if(y-x&gt;1){
+            int i=x,j;
+            for(;i&lt;y;i++){
+                if(sequence[i]&gt;sequence[y]){
+                    break;
+                }
+            }
+            j=i;
+            for(;j&lt;y;j++){
+                if(sequence[j]&lt;sequence[y]){
+                    return false;
+                }
+            }
+            return BST(sequence,x,i-1) &amp;&amp; BST(sequence,i,j-1);
+        }
+        return true;
+    }</code></pre>
+<h3 id="23、二叉树中和为某一值的路径"><a href="#23、二叉树中和为某一值的路径" class="headerlink" title="23、二叉树中和为某一值的路径"></a>23、二叉树中和为某一值的路径</h3><blockquote>
+<p>输入一颗二叉树的跟节点和一个整数，打印出二叉树中结点值的和为输入整数的所有路径。路径定义为从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。(注意: 在返回值的list中，数组长度大的数组靠前)</p>
+</blockquote>
+<ul>
+<li>思路：往下找直到根节点的和为目标值，相等且是根节点就加入res中，否则再去递归查找左子树右子树，最后还要删除该节点。</li>
+</ul>
+<pre><code class="java">ArrayList&lt;Integer&gt; R = new ArrayList&lt;Integer&gt;();
+    ArrayList&lt;ArrayList&lt;Integer&gt;&gt; res = new ArrayList&lt;ArrayList&lt;Integer&gt;&gt;();
+
+    public ArrayList&lt;ArrayList&lt;Integer&gt;&gt; FindPath(TreeNode root, int target) {
+        if(root == null){
+            return res;
+        }
+        find(root,target);
+        return res;
+    }
+    public void find(TreeNode root, int target){
+
+        R.add(root.val);
+        if(root.val == target &amp;&amp; root.left == null &amp;&amp; root.right == null){
+            res.add(new ArrayList&lt;&gt;(R));
+        }
+        if(root.left!=null){
+            find(root.left,target-root.val);
+        }
+        if(root.right!=null){
+            find(root.right,target-root.val);
+        }
+        R.remove(R.size()-1);
+    }</code></pre>
+<h3 id="24、二叉搜索树与双向链表"><a href="#24、二叉搜索树与双向链表" class="headerlink" title="24、二叉搜索树与双向链表"></a>24、二叉搜索树与双向链表</h3><blockquote>
+<p>输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的双向链表。要求不能创建任何新的结点，只能调整树中结点指针的指向。</p>
+</blockquote>
+<ul>
+<li>思路：根据中序遍历进行变化，使用堆栈，先一直找左子树入栈，直到根节点。然后开始出栈，同时把右子树入栈。对于这道题就是需要在出栈时进行操作，出栈的数左指向前一个出栈的，前一个出栈右指该数，所以要知道前一个结点。</li>
+</ul>
+<pre><code class="java">public TreeNode Convert(TreeNode root){
+        TreeNode first = null;
+        if(root!=null){
+            Stack&lt;TreeNode&gt; temp = new Stack&lt;TreeNode&gt;();
+            TreeNode pre = null;
+            boolean flag = true;
+            while(!temp.isEmpty() || root!=null){
+                if(root!=null){
+                    temp.push(root);
+                    root = root.left;
+                }else{
+                    root = temp.pop();
+                    if(flag){
+                        first = root;
+                        pre = root;
+                        flag = false;
+                    }else{
+                        pre.right = root;
+                        root.left = pre;
+                        pre = root;
+                    }
+                    root = root.right;
+                }
+            }
+        }
+        return first;
+    }</code></pre>
+<ul>
+<li>使用递归法：同样也是用中序的递归，关键点在于获取链表的头结点，通过一个first变量。另外在对根节点操作的部分，需要改进，就是要让前面排好序的right指向现在的，现在left的指向以前的。</li>
+</ul>
+<pre><code class="java">TreeNode head = null;
+    TreeNode first = null;
+    public TreeNode Convert1(TreeNode root){
+        sub(root);
+        return first;
+    }
+    public void sub(TreeNode root){
+        if(root == null) return;
+        sub(root.left);
+        if(head == null){
+            first = root;
+            head = root;
+        }else{
+            root.left = head;
+            head.right = root;
+            head = root;
+        }
+        sub(root.right);
+    }</code></pre>
+<h3 id="25、数组中出现次数超过一半的数字"><a href="#25、数组中出现次数超过一半的数字" class="headerlink" title="25、数组中出现次数超过一半的数字"></a>25、数组中出现次数超过一半的数字</h3><blockquote>
+<p>数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。如果不存在则输出0。</p>
+</blockquote>
+<ul>
+<li>思路：先排序，再查找时间复杂度高。选择O(n)的算法。<ol>
+<li>通过快排的方法找到中位数，如果出现次数大于等于一半，肯定是中位数，再去判断是不是。</li>
+</ol>
+</li>
+</ul>
+<pre><code class="java">public static int MoreThanHalfNum_Solution(int[] array) {
+        int temp,len = array.length,start=0,end =len-1;
+        temp = getmid(array,start,end);
+        while (temp!=len/2){
+            if(temp&gt;len/2){
+                end = temp-1;
+                temp = getmid(array,start,end);
+            }else{
+                start = temp+1;
+                temp = getmid(array,temp+1,end);
+            }
+        }
+        if(check(array,array[temp]))
+            return array[temp];
+        else
+            return 0;
+    }
+
+    //
+    public static boolean check(int [] array,int num){
+        int len = array.length,time=0;
+        for(int i=0;i&lt;len;i++){
+            if(num == array[i])
+                time++;
+        }
+        if(time&gt;len/2)
+            return true;
+        else
+            return false;
+    }
+    public static int getmid(int [] num,int i,int j){
+        int temp = num[i];
+        while(i&lt;j){
+            while (i&lt;j &amp;&amp; temp&lt;=num[j]){
+                j--;
+            }
+            if(i&lt;j){
+                num[i] = num[j];
+            }
+            while (i&lt;j &amp;&amp; temp &gt;= num[i]){
+                i++;
+            }
+            if(i&lt;j){
+                num[j] = num[i];
+            }
+        }
+        num[i] = temp;
+        return i;
+    }</code></pre>
+<ol start="2">
+<li>通过数组的特点，最简单方法，一个数字数组中出现次数大于len/2，则该数出现的次数一定是最多的，所以可以直接用两个变量来遍历完数组，找到可能是该数的数字。再去判断这个数是不是 </li>
+</ol>
+<pre><code class="java">//方法2
+    public static int MoreThanHalfNum_Solution1(int[] array) {
+        int len = array.length;
+        int temp=array[0],count=1,i,j;
+        for(i=1;i&lt;len;i++){
+            if(array[i-1] == array[i]){
+                count++;
+                temp = array[i];
+            }else if(count == 1){
+                temp = array[i];
+            }else{
+                count--;
+            }
+        }
+        if(check(array,temp))
+            return temp;
+        else
+            return 0;
+    }
+
+    //
+    public static boolean check(int [] array,int num){
+        int len = array.length,time=0;
+        for(int i=0;i&lt;len;i++){
+            if(num == array[i])
+                time++;
+        }
+        if(time&gt;len/2)
+            return true;
+        else
+            return false;
+    }</code></pre>
+<ul>
+<li>变形：找出大于1/3个数的，就是找出现次数最多的前两个，对于1/n的一样，找出次数最多的n-1个。只需要遍历一次即可</li>
+</ul>
+<pre><code class="java">//取出数组中不连续的值，达到1/3len个(排序之后)
+    public static ArrayList san(int [] a){
+        int len = a.length;
+        ArrayList list = new ArrayList();
+        int x=0,y=0;
+        int xnum=0,ynum=0;
+        for(int i =0;i&lt;len;i++){
+            if(xnum == 0||x==a[i]){
+                x = a[i];
+                ++xnum;
+            }else if(ynum == 0||y==a[i]){
+                y = a[i];
+                ++ynum;
+            }else{
+                xnum--;
+                ynum--;
+            }
+        }
+        if(check(x,a)){
+            list.add(x);
+        }
+        if(check(y,a)){
+            list.add(y);
+        }
+        return list;
+
+    }
+
+    public static boolean check(int x,int[] a) {
+        int num =0;
+        for(int i=0;i&lt;a.length;i++){
+            if(a[i] == x){
+                num++;
+            }
+        }
+        if(num&gt;a.length/3)
+            return true;
+        else
+            return false;
+    }
+
+//连续的更简单，就是遍历一次只用一个变量即可
+    public static ArrayList san1(int [] a){
+        int len = a.length;
+        ArrayList list = new ArrayList();
+        int x=0;
+        int xnum=0;
+        for(int i =0;i&lt;len;i++){
+            if(xnum == 0||x==a[i]){
+                x = a[i];
+                ++xnum;
+            }else{
+                if(xnum&gt;len/3){
+                    list.add(x);
+                    xnum=1;
+                    x=a[i];
+                }else{
+                    xnum=1;
+                    x=a[i];
+                }
+            }
+        }
+        return list;
+    }</code></pre>
+<h3 id="26、最小的K个数"><a href="#26、最小的K个数" class="headerlink" title="26、最小的K个数"></a>26、最小的K个数</h3><blockquote>
+<p>输入n个整数，找出其中最小的K个数。例如输入4,5,1,6,2,7,3,8这8个数字，则最小的4个数字是1,2,3,4,。</p>
+</blockquote>
+<ul>
+<li>思路1：与用快排思路相似，找到位置为K-1的数字，同时前边都是小于他的，后边都是大于他的。（但是改变了原数组中元素位置）</li>
+</ul>
+<pre><code class="java">public ArrayList&lt;Integer&gt; GetLeastNumbers_Solution(int [] input, int k) {
+        int len = input.length;
+        int start =0,end = len-1;
+        int temp = getmid(input,start,end);
+        ArrayList&lt;Integer&gt; res = new ArrayList&lt;Integer&gt;();
+        if(len&lt;k || k&lt;=0 || len&lt;=0){
+            return res;
+        }
+        while(temp!=k-1){
+            if(temp&gt;k-1){
+                end = temp-1;
+                temp = getmid(input,start,end);
+            }else{
+                start = temp+1;
+                temp = getmid(input,start,end);
+            }
+        }
+        for(int i=0;i&lt;=temp;i++){
+            res.add(input[i]);
+        }
+        return res;
+    }
+
+    //核心算法，也是快排的重要
+    public int getmid(int [] array,int i,int j){
+        int temp = array[i];
+        while(i&lt;j){
+            if(i&lt;j &amp;&amp; temp&lt;=array[j]){
+                j--;
+            }
+            if(i&lt;j){
+                array[i] = array[j];
+            }
+            if(i&lt;j&amp;&amp;temp&gt;=array[i]){
+                i++;
+            }
+            if(i&lt;j){
+                array[j] = array[i];
+            }
+        }
+        array[i] = temp;
+        return i;
+    }</code></pre>
+<ul>
+<li>思路2（适合处理海量数据）堆排序：堆排序取出最大值O(1)，插入删除是O(logn)。每次比较堆排序的第一个，如果比他小，放进去，重新排序。最后得到的就是K个最小的。同理找K个最大的话，建立最小堆，比每次比较第一个，如果比他大则放进去。</li>
+</ul>
+<pre><code class="java">public ArrayList&lt;Integer&gt; GetLeastNumbers_Solution(int [] input, int k) {
+        ArrayList&lt;Integer&gt; res = new ArrayList&lt;Integer&gt;();
+        int len = input.length;
+        if(k&lt;1||len&lt;k){
+            return res;
+        }
+        int [] copy = new int[k];
+        for(int i=0;i&lt;k;i++){
+            copy[i] = input[i];
+        }
+
+        for(int x=k/2-1;x&gt;=0;x--){
+            sift(copy,x,k);
+        }
+
+        for(int i=k;i&lt;input.length;i++){
+            if(copy[0]&gt;input[i]){
+                copy[0] = input[i];
+                sift(copy,0,k);
+            }
+        }
+
+        for(int i=0;i&lt;k;i++){
+            res.add(copy[i]);
+        }
+        return res;
+
+    }
+    //构成最大堆
+    public  static void sift (int[] input,int low,int high){
+        int parent = low;
+        int temp = input[parent];
+        int child = 2*parent+1;
+        while(child&lt;high){
+            if(child&lt;high-1 &amp;&amp; input[child]&lt;input[child+1]){
+                child++;
+            }
+            if(temp&lt;input[child]){
+                input[parent] = input[child];
+                parent = child;
+                child = 2*parent+1;
+            }else{
+                break;
+            }
+
+        }
+        input[parent] = temp;
+    }</code></pre>
+<h3 id="27、字符串的排列"><a href="#27、字符串的排列" class="headerlink" title="27、字符串的排列"></a>27、字符串的排列</h3><blockquote>
+<p>输入一个字符串,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。</p>
+<ul>
+<li>全排列题目</li>
+<li>思路1：递归法；回溯法；就是第一个数和后面所有数交换位置，然后再第二个数，一直递归。要注意遇到相同的直接跳过。举例就是{0与1交换，然后递归对2开始的后面数字做处理，最后把0与1再交换回来}，这是i++后的一次过程，交换回来才能对0跟2进行交换，否则可能是1和2交换。</li>
+</ul>
+</blockquote>
+<pre><code class="java">    public static ArrayList&lt;String&gt; Permutation(String str) {
+        char [] s = str.toCharArray();
+        ArrayList&lt;String&gt; ret = new ArrayList&lt;String&gt;();
+        if(s.length&gt;0 &amp;&amp; str!=null)
+            fullsort(s,0,ret);
+        Collections.sort(ret);
+        return ret;
+    }
+
+    public static void fullsort(char[] s,int begin,ArrayList&lt;String&gt; ret){
+        if(begin == s.length-1){
+            ret.add(String.valueOf(s));
+        }else{
+            Set&lt;Character&gt; chasrset = new HashSet&lt;Character&gt;();
+            for(int i = begin;i&lt;s.length;i++){
+                if(i==begin || !chasrset.contains(s[i])){
+                    chasrset.add(s[i]);
+                    swap(s,i,begin);
+                    fullsort(s,begin+1,ret);
+                    swap(s,begin,i);
+                }
+            }
+        }
+    }
+
+    public static void swap(char [] s,int i,int j){
+        char temp = s[i];
+        s[i] = s[j];
+        s[j] = temp;
+    }</code></pre>
+<ul>
+<li>思路2：非递归（字典序法）字典序就是按照字典的顺序，可以很容易比较两个数的大小，就是从头往后比较每一位的大小<blockquote>
+<p> 一般而言，设P是[1,n]的一个全排列。<br>　　　　　　P=P1P2…Pn=P1P2…Pj-1PjPj+1…Pk-1PkPk+1…Pn<br>　　　　find:　　j=max{i|Pi&lt;Pi+1}<br>　　　　　　　　　k=max{i|Pi&gt;Pj}<br>　　　　　　1，  对换Pj，Pk，<br>　　　　　　2，  将Pj+1…Pk-1PjPk+1…Pn翻转</p>
+<pre><code>      P’= P1P2…Pj-1PkPn…Pk+1PjPk-1…Pj+1即P的下一个</code></pre></blockquote>
+</li>
+</ul>
+<pre><code class="java">public ArrayList&lt;String&gt; Permutation2(String str){
+        ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();
+        if(str==null || str.length() == 0){
+            return list;
+        }
+        char [] temp = str.toCharArray();
+        Arrays.sort(temp);
+        list.add(String.valueOf(temp));
+        int len = temp.length;
+        while(true){
+            int lIndex = len-1;
+            int rIndex = 0;
+            while(lIndex&gt;=1&amp;&amp; temp[lIndex-1]&gt;=temp[lIndex]){
+                lIndex--;
+            }
+            if(lIndex == 0)
+                break;
+            rIndex = lIndex;
+            while(rIndex&lt;len &amp;&amp; temp[rIndex]&gt;temp[rIndex-1])
+                rIndex++;
+            swap(temp,lIndex-1,rIndex-1);
+            reverse(temp,lIndex);
+            list.add(String.valueOf(temp));
+        }
+        return list;
+    }
+
+    private void reverse(char[] chars,int k){
+        if(chars == null || chars.length&lt;=k){
+            return;
+        }
+        int len = chars.length;
+        for(int i =0;i&lt;(len-k)/2;i++){
+            int m = k+i;
+            int n = len-1-i;
+            if(m&lt;=n){
+                swap(chars,m,n);
+            } 
+        }
+    }</code></pre>
+<h3 id="30、连续子数组的最大和"><a href="#30、连续子数组的最大和" class="headerlink" title="30、连续子数组的最大和"></a>30、连续子数组的最大和</h3><blockquote>
+<p>HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天测试组开完会后,他又发话了:在古老的一维模式识别中,常常需要计算连续子向量的最大和,当向量全为正数的时候,问题很好解决。但是,如果向量中包含负数,是否应该包含某个负数,并期望旁边的正数会弥补它呢？例如:{6,-3,-2,7,-15,1,2,2},连续子向量的最大和为8(从第0个开始,到第3个为止)。给一个数组，返回它的最大连续子序列的和，你会不会被他忽悠住？(子向量的长度至少是1)</p>
+</blockquote>
+<ul>
+<li>思路：不用考虑当前值，只用考虑前面的值的正负，如果是正的可以直接加当前值，如果是负的，直接把当前值赋给最大值。每次都要比较当前值与最大值的大小。</li>
+</ul>
+<pre><code class="java">public int FindGreatestSumOfSubArray(int[] array) {
+        int max=array[0],len=array.length,ret=array[0];
+        if(len == 0 || array == null)
+            return 0;
+
+        for(int i=1;i&lt;len;i++){
+            if(max&gt;=0){
+                max += array[i];
+            }else{
+                max = array[i];
+            }
+
+            if(max&gt;ret){
+                ret = max;
+            }
+        }
+        return ret;
+    }</code></pre>
+<ul>
+<li>思路2 动态规划：每一次前进要不是把这个值放入max里面，要不就是前面的都不要了。因此每次都是最大的话，肯定就能得到最大的值，同时每次还会记录当前结果的最大值</li>
+</ul>
+<pre><code class="java">public int FindGreatestSumOfSubArray1(int[] array) {
+        int max=array[0],len=array.length,ret=array[0];
+        if(len == 0 || array == null)
+            return 0;
+        for(int i=1;i&lt;len;i++){
+            max = Math.max(max+array[i],array[i]);
+            ret = Math.max(ret,max);
+        }
+        return ret;
+    }</code></pre>
+
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="https://zqfang666.github.io" class="b-link-green">DayByDay</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2019/03/11/剑指offer NO.1（2018.12.25——2018.1.25）/" class="b-link-green">剑指offer(上)</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/05/24/暑期实习面经（19年3月 至 19年4月）/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="暑期实习面经（19年3月至19年4月）">
+                        
+                        <span class="card-title">暑期实习面经（19年3月至19年4月）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">2019.4.1 蘑菇街+东方财富项目中是否用到多线程秒杀系统内部如何实现redis与mysql的同步对于分布式的了解：讲讲Java中的长短连接（可以实现以下）
+长连接、短链接（Socket实现）  http长短连接适合的 长：客户端服务端</div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-05-24
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/面试/" class="post-category" target="_blank">
+                                    面试
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/03/07/今日头条后端笔试题（2018.12刷）/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="今日头条后端笔试题（2018.12刷）">
+                        
+                        <span class="card-title">今日头条后端笔试题（2018.12刷）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">2018年12月参加头条武汉open day（后台）
+有2，3，5，三种硬币，输入每个硬币的个数，和要凑够的钱数，求最少需要的硬币球
+演唱会，有n个歌手，开始时间s，结束时间e，求最多可听几场，结束时间不可以等于下一场开始时间。
+一个点餐系</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-03-07
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Coding/" class="post-category" target="_blank">
+                                    Coding
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+    </div>
+    <div class="col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="https://blinkfox.github.io/" target="_blank">Blinkfox</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">30.1k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/zqfang666" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:zqfang321@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=847368807" class="tooltipped" data-tooltip="QQ联系我: 847368807" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input" autofocus="">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>
